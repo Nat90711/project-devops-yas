@@ -146,17 +146,20 @@ jobs:
 
       - name: Compile project for SonarQube
         run: |
-          mvn package \
+          mvn install \
             -DskipTests \
-            -Dmaven.main.skip=false \
             --batch-mode \
             --fail-at-end
 
       - name: Copy dependencies for SonarQube classpath
         # FIX: Cần thiết để sonar.java.libraries không bị trống
         # Không có classpath → Sonar không resolve được types → coverage mapping lỗi
-        run: mvn dependency:copy-dependencies -DoutputDirectory=target/dependency -DincludeScope=compile -q --batch-mode
-
+        run: |
+          mvn dependency:copy-dependencies \
+            -DoutputDirectory=target/dependency \
+            -DincludeScope=compile \
+            -q \
+            --batch-mode
       - name: Prepare SonarQube parameters
         id: sonar-params
         run: |

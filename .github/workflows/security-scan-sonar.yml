@@ -152,6 +152,11 @@ jobs:
             --batch-mode \
             --fail-at-end
 
+      - name: Copy dependencies for SonarQube classpath
+        # FIX: Cần thiết để sonar.java.libraries không bị trống
+        # Không có classpath → Sonar không resolve được types → coverage mapping lỗi
+        run: mvn dependency:copy-dependencies -DoutputDirectory=target/dependency -DincludeScope=compile -q --batch-mode
+
       - name: Prepare SonarQube parameters
         id: sonar-params
         run: |
@@ -169,14 +174,16 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: https://sonarcloud.io  # FIX: required for SonarCloud; omitting this causes scanner to target localhost:9000
         with:
           args: >
             -Dsonar.projectKey=nat90711_project-devops-yas
             -Dsonar.organization=nat90711
             ${{ steps.sonar-params.outputs.coverage-paths != '' && format('-Dsonar.coverage.jacoco.xmlReportPaths={0}', steps.sonar-params.outputs.coverage-paths) || '' }}
             -Dsonar.java.binaries=**/target/classes
+            -Dsonar.java.libraries=**/target/dependency/*.jar
+            -Dsonar.java.source=25
             -Dsonar.exclusions=**/src/test/**,**/config/**,**/dto/**,**/entity/**,**/*Exception.java
+            -Dsonar.text.exclusions=**/.mvn/wrapper/maven-wrapper.jar
 
       - name: SonarQube scan completed
         run: |
@@ -186,12 +193,15 @@ jobs:
       # ----------------------------------------------------------------
       # Snyk Monitor — chỉ chạy khi push vào main
       # ----------------------------------------------------------------
-      - name: Snyk Monitor (Gửi báo cáo khi Push vào Main)
+      - name: Install Snyk CLI (for Monitor)
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        uses: snyk/actions/maven@master
+        run: npm install -g snyk@1.1304.1 --ignore-scripts  # Pin version + tắt lifecycle scripts
+
+      - name: Snyk Monitor (Gửi báo cáo khi Push vào Main)
+        # FIX: Dùng Snyk CLI trực tiếp thay snyk/actions/maven@master wrapper
+        # snyk/actions/maven không nhận JAVA_HOME từ actions/setup-java → lỗi JAVA_HOME
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: snyk monitor --all-projects
         continue-on-error: true
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
-          command: monitor
-          args: --all-projects

@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: yas-staging
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/description: "YAS Staging environment - synced only on release tags (v1.x.x)"
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Nat90711/project-devops-yas
+    targetRevision: main
+    path: k8s/charts
+    helm:
+      valueFiles:
+        - ../environments/staging/values.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: staging
+  syncPolicy:
+    # KHÔNG auto-sync – chỉ sync khi Jenkins CI gọi `argocd app sync yas-staging`
+    syncOptions:
+      - CreateNamespace=true

@@ -81,17 +81,17 @@ class ProductSyncDataConsumerTest {
     }
 
     @Test
-    void testProcessDltMessage_shouldExecuteWithoutException() {
+    void testProcessMessage_shouldExecuteWithoutException() {
         // Given
         ProductMsgKey key = ProductMsgKey.builder().id(1L).build();
         ProductCdcMessage message = ProductCdcMessage.builder()
                 .op(CREATE)
                 .build();
+        org.springframework.messaging.MessageHeaders headers = new org.springframework.messaging.MessageHeaders(java.util.Map.of());
         
         // When & Then
-        // Simply call the method and ensure no exception is thrown
         org.junit.jupiter.api.Assertions.assertDoesNotThrow(() -> 
-            productSyncDataConsumer.processDltMessage(key, message, null)
+            productSyncDataConsumer.processMessage(key, message, headers)
         );
     }
 }

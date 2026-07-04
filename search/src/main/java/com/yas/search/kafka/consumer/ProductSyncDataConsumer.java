@@ -46,6 +46,15 @@ public class ProductSyncDataConsumer extends BaseCdcConsumer<ProductMsgKey, Prod
         processMessage(key, productCdcMessage, headers, this::sync);
     }
 
+    @org.springframework.kafka.annotation.DltHandler
+    public void processDltMessage(
+        @Header(KafkaHeaders.RECEIVED_KEY) ProductMsgKey key,
+        @Payload(required = false) @Valid ProductCdcMessage productCdcMessage,
+        @Headers MessageHeaders headers
+    ) {
+        log.error("Event from DLT - key: {}, value: {}", key, productCdcMessage);
+    }
+
     public void sync(ProductMsgKey key, ProductCdcMessage productCdcMessage) {
         boolean isHardDeleteEvent = productCdcMessage == null || DELETE.equals(productCdcMessage.getOp());
         if (isHardDeleteEvent) {

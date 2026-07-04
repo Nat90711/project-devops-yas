@@ -41,4 +41,13 @@ public class ProductSyncDataConsumer extends BaseCdcConsumer<ProductMsgKey, Prod
     ) {
         processMessage(key, productCdcMessage, headers, productSyncService::sync);
     }
+
+    @org.springframework.kafka.annotation.DltHandler
+    public void processDltMessage(
+        @Header(KafkaHeaders.RECEIVED_KEY) ProductMsgKey key,
+        @Payload(required = false) @Valid ProductCdcMessage productCdcMessage,
+        @Headers MessageHeaders headers
+    ) {
+        LOGGER.error("Event from DLT - key: {}, value: {}", key, productCdcMessage);
+    }
 }

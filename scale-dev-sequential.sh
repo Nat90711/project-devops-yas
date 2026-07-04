@@ -39,7 +39,7 @@ for DEPLOYMENT in "${DEPLOYMENTS[@]}"; do
   # Chờ cho đến khi pod chuyển sang trạng thái READY (Timeout 3 phút)
   kubectl rollout status deployment/${DEPLOYMENT} -n ${NAMESPACE} --timeout=180s
   
-  if [ $? -eq 0 ]; then
+  if [[ $? -eq 0 ]]; then
     echo "✅ ${DEPLOYMENT} đã khởi động thành công!"
   else
     echo "❌ CẢNH BÁO: ${DEPLOYMENT} khởi động thất bại hoặc quá thời gian!"

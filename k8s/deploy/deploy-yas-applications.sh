@@ -11,7 +11,7 @@ read -rd '' DOMAIN \
 < <(yq -r '.domain' ./cluster-config.yaml)
 
 PREFIX=""
-if [ "$NAMESPACE" != "yas" ]; then
+if [[ "$NAMESPACE" != "yas" ]]; then
     PREFIX="${NAMESPACE}-"
 fi
 

@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: yas-gateway-routes-config-configmap
+  namespace: yas
+  annotations:
+    meta.helm.sh/release-name: yas-configuration
+    meta.helm.sh/release-namespace: yas
+data:
+  gateway-routes-config.yaml: |
+    spring:
+      cloud:
+        gateway:
+          routes:
+          - filters:
+            - 'RewritePath=/api/(?<segment>.*), /${segment}'
+            - TokenRelay=
+            id: product_api
+            predicates:
+            - Path=/api/product/**
+            uri: http://product
+          - filters:
+            - 'RewritePath=/api/(?<segment>.*), /${segment}'
+            - TokenRelay=
+            id: cart_api
+            predicates:
+            - Path=/api/cart/**
+            uri: http://cart
+          - filters:
+            - 'RewritePath=/api/(?<segment>.*), /${segment}'
+            - TokenRelay=
+            id: customer_api
+            predicates:
+            - Path=/api/customer/**
+            uri: http://customer
+          - filters:
+            - 'RewritePath=/api/(?<segment>.*), /${segment}'
+            - TokenRelay=
+            id: sampledata_api
+            predicates:
+            - Path=/api/sampledata/**
+            uri: http://sampledata
+          - id: ui
+            predicates:
+            - Path=/**
+            uri: ${UI_HOST}

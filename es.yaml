@@ -1,0 +1,81 @@
+apiVersion: elasticsearch.k8s.elastic.co/v1
+kind: Elasticsearch
+metadata:
+  annotations:
+    eck.k8s.elastic.co/orchestration-hints: '{"no_transient_settings":true,"service_accounts":true}'
+    meta.helm.sh/release-name: elasticsearch-cluster
+    meta.helm.sh/release-namespace: elasticsearch
+  labels:
+    app.kubernetes.io/managed-by: Helm
+  name: elasticsearch
+  namespace: elasticsearch
+spec:
+  auth:
+    fileRealm:
+    - secretName: user-credentials-secret
+  http:
+    service:
+      metadata: {}
+      spec: {}
+    tls:
+      certificate: {}
+      client: {}
+      selfSignedCertificate:
+        disabled: true
+  monitoring:
+    logs: {}
+    metrics: {}
+  nodeSets:
+  - config:
+      node.store.allow_mmap: false
+    count: 1
+    name: node
+    podTemplate:
+      metadata: {}
+      spec:
+        containers: null
+  remoteClusterServer:
+    service:
+      metadata: {}
+      spec: {}
+  transport:
+    service:
+      metadata: {}
+      spec: {}
+    tls:
+      certificate: {}
+      certificateAuthorities: {}
+  updateStrategy:
+    changeBudget: {}
+  version: 9.2.3
+status:
+  availableNodes: 1
+  conditions:
+  - lastTransitionTime: "2026-06-27T21:00:01Z"
+    status: "True"
+    type: ReconciliationComplete
+  - lastTransitionTime: "2026-06-27T20:59:01Z"
+    message: All nodes are running version 8.15.0
+    status: "True"
+    type: RunningDesiredVersion
+  - lastTransitionTime: "2026-06-27T21:00:01Z"
+    message: Service elasticsearch/elasticsearch-es-internal-http has endpoints
+    status: "True"
+    type: ElasticsearchIsReachable
+  - lastTransitionTime: "2026-06-27T20:58:06Z"
+    message: 'Cannot get compute and storage resources from Elasticsearch resource
+      generation 3: cannot compute resources for NodeSet "node": no CPU request or
+      limit set'
+    status: "False"
+    type: ResourcesAwareManagement
+  health: green
+  inProgressOperations:
+    downscale:
+      lastUpdatedTime: "2026-06-21T09:40:07Z"
+    upgrade:
+      lastUpdatedTime: "2026-06-27T21:00:01Z"
+    upscale:
+      lastUpdatedTime: "2026-06-21T09:40:07Z"
+  observedGeneration: 3
+  phase: Ready
+  version: 9.2.3

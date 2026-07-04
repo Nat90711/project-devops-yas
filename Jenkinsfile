@@ -6,6 +6,10 @@ pipeline {
         maven 'maven3'
     }
 
+    environment {
+        DOCKERHUB_ACCOUNT = 'tuandaklak'
+    }
+
     stages {
         stage('Build Common Library') {
             steps {
@@ -97,6 +101,35 @@ pipeline {
                                         maximumLineCoverage: '70'       
                                     )
                                 }
+                                
+                                stage("Build & Push Image - ${serviceName}") {
+                                    echo "Đang Build & Push Docker image cho service: ${serviceName}..."
+                                    script {
+                                        def commitId = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
+                                        
+                                        withCredentials([usernamePassword(
+                                            credentialsId: 'dockerhub-credentials',
+                                            usernameVariable: 'DOCKER_USER',
+                                            passwordVariable: 'DOCKER_PASS'
+                                        )]) {
+                                            sh "echo \$DOCKER_PASS | docker login -u \$DOCKER_USER --password-stdin"
+                                            
+                                            // Build và Push image với tag là Commit ID
+                                            sh """
+                                                docker build -t ${env.DOCKERHUB_ACCOUNT}/${serviceName}:${commitId} ./${serviceName}
+                                                docker push ${env.DOCKERHUB_ACCOUNT}/${serviceName}:${commitId}
+                                            """
+                                            
+                                            // Nếu là nhánh main, push thêm tag latest
+                                            if (env.BRANCH_NAME == 'main') {
+                                                sh """
+                                                    docker tag ${env.DOCKERHUB_ACCOUNT}/${serviceName}:${commitId} ${env.DOCKERHUB_ACCOUNT}/${serviceName}:latest
+                                                    docker push ${env.DOCKERHUB_ACCOUNT}/${serviceName}:latest
+                                                """
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         } else {
                             echo "Bỏ qua ${serviceName} vì không có sự thay đổi mã nguồn."
@@ -106,6 +139,13 @@ pipeline {
                     // Thực thi các stage (hiển thị giao diện Jenkins giống matrix)
                     if (parallelStages.size() > 0) {
                         parallel parallelStages
+                        
+                        // Sau khi build tất cả xong, lưu commit ID ra file để ArgoCD (Thành viên 3) sử dụng
+                        script {
+                            def commitId = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
+                            sh "echo ${commitId} > build-info.txt"
+                            archiveArtifacts artifacts: 'build-info.txt', allowEmptyArchive: true
+                        }
                     } else {
                         echo "Không có thay đổi nào trong các service, bỏ qua bước Build & Test."
                     }

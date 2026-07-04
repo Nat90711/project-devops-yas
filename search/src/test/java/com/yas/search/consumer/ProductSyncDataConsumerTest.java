@@ -79,4 +79,19 @@ class ProductSyncDataConsumerTest {
         // Then
         verify(productSyncDataService, times(1)).deleteProduct(productId);
     }
+
+    @Test
+    void testProcessDltMessage_shouldExecuteWithoutException() {
+        // Given
+        ProductMsgKey key = ProductMsgKey.builder().id(1L).build();
+        ProductCdcMessage message = ProductCdcMessage.builder()
+                .op(CREATE)
+                .build();
+        
+        // When & Then
+        // Simply call the method and ensure no exception is thrown
+        org.junit.jupiter.api.Assertions.assertDoesNotThrow(() -> 
+            productSyncDataConsumer.processDltMessage(key, message, null)
+        );
+    }
 }

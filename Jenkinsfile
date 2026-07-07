@@ -106,7 +106,7 @@ pipeline {
                                     echo "Đang Build & Push Docker image cho service: ${serviceName}..."
                                     script {
                                         if (fileExists("${serviceName}/Dockerfile")) {
-                                            def commitId = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
+                                            def commitId = sh(script: 'git rev-parse HEAD | cut -c1-7', returnStdout: true).trim()
                                             
                                             withCredentials([usernamePassword(
                                                 credentialsId: 'dockerhub-credentials',
@@ -146,7 +146,7 @@ pipeline {
                         
                         // Sau khi build tất cả xong, lưu commit ID ra file để ArgoCD (Thành viên 3) sử dụng
                         script {
-                            def commitId = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
+                            def commitId = sh(script: 'git rev-parse HEAD | cut -c1-7', returnStdout: true).trim()
                             sh "echo ${commitId} > build-info.txt"
                             archiveArtifacts artifacts: 'build-info.txt', allowEmptyArchive: true
                         }

@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    environment {
+        // TODO: Đổi thành account Docker Hub của nhóm bạn
+        DOCKERHUB_ACCOUNT = 'your-dockerhub-username' 
+    }
+
     tools {
         jdk 'jdk25'
         maven 'maven3'
@@ -62,6 +67,9 @@ pipeline {
                         }
                     }
 
+                    // Lưu lại danh sách service có thay đổi để dùng cho stage Build & Push Image
+                    def changedServicesList = []
+
                     // Khởi tạo danh sách các stage song song
                     def parallelStages = [:]
 
@@ -70,6 +78,7 @@ pipeline {
                         def serviceName = services[i]
 
                         if (checkChanges(serviceName)) {
+                            changedServicesList.add(serviceName)
                             parallelStages[serviceName] = {
                                 stage("Build Phase - ${serviceName}") {
                                     echo "Đang Build service: ${serviceName}..."
@@ -113,12 +122,56 @@ pipeline {
                         }
                     }
 
+                    // Gán vào biến môi trường để stage tiếp theo có thể đọc được
+                    env.CHANGED_SERVICES = changedServicesList.join(',')
+
                     // Thực thi các stage (hiển thị giao diện Jenkins giống matrix)
                     if (parallelStages.size() > 0) {
                         parallel parallelStages
                     } else {
                         echo "Không có thay đổi nào trong các service, bỏ qua bước Build & Test."
                     }
+                }
+            }
+        }
+
+        stage('Build & Push Image') {
+            when {
+                // Chỉ chạy stage này nếu có ít nhất 1 service bị thay đổi
+                expression { env.CHANGED_SERVICES != null && env.CHANGED_SERVICES != '' }
+            }
+            steps {
+                script {
+                    def commitId = sh(
+                        script: 'git rev-parse --short HEAD',
+                        returnStdout: true
+                    ).trim()
+                    env.COMMIT_ID = commitId
+
+                    withCredentials([usernamePassword(
+                        credentialsId: 'dockerhub-credentials',
+                        usernameVariable: 'DOCKER_USER',
+                        passwordVariable: 'DOCKER_PASS'
+                    )]) {
+                        sh "echo \$DOCKER_PASS | docker login -u \$DOCKER_USER --password-stdin"
+
+                        env.CHANGED_SERVICES.split(',').each { svc ->
+                            sh """
+                                docker build -t ${env.DOCKERHUB_ACCOUNT}/${svc}:${commitId} ./${svc}
+                                docker push ${env.DOCKERHUB_ACCOUNT}/${svc}:${commitId}
+                            """
+                            // Nếu là branch main → cũng push tag latest
+                            if (env.BRANCH_NAME == 'main') {
+                                sh """
+                                    docker tag ${env.DOCKERHUB_ACCOUNT}/${svc}:${commitId} ${env.DOCKERHUB_ACCOUNT}/${svc}:latest
+                                    docker push ${env.DOCKERHUB_ACCOUNT}/${svc}:latest
+                                """
+                            }
+                        }
+                    }
+                    // Lưu lại commit id để TV3 (ArgoCD stage) sử dụng
+                    sh "echo ${commitId} > build-info.txt"
+                    archiveArtifacts artifacts: 'build-info.txt'
                 }
             }
         }
@@ -142,4 +195,3 @@ def extractChangedFiles() {
     }
     return files
 }
-

@@ -24,3 +24,8 @@ sampledata:
 location:
   backend:
     replicaCount: 0
+
+# Tắt Ingress của swagger-ui để tránh conflict với production (yas)
+swagger-ui:
+  ingress:
+    enabled: false

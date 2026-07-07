@@ -10,17 +10,17 @@ spec:
   source:
     repoURL: https://github.com/Nat90711/project-devops-yas
     targetRevision: main
-    path: k8s/charts
+    path: k8s/charts/yas-all              # ← SỬA: trỏ vào umbrella chart
     helm:
       valueFiles:
-        - ../environments/dev/values.yaml
+        - ../../environments/dev/values.yaml  # ← SỬA: đường dẫn relative từ chart path
   destination:
     server: https://kubernetes.default.svc
     namespace: dev
   syncPolicy:
     automated:
-      prune: true       # Xóa resource không còn trong manifest
-      selfHeal: true    # Tự fix nếu ai kubectl apply thủ công sai
+      prune: true
+      selfHeal: false   # ← SỬA: tắt selfHeal tránh tự bật lại pods (QUY_TAC_RAM_K8S.md)
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true

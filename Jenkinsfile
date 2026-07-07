@@ -175,6 +175,50 @@ pipeline {
                 }
             }
         }
+
+        stage('Deploy to GitOps Branch') {
+            when {
+                branch 'main'
+            }
+            steps {
+                script {
+                    withCredentials([usernamePassword(
+                        credentialsId: 'github-credentials',
+                        usernameVariable: 'GIT_USER',
+                        passwordVariable: 'GIT_TOKEN'
+                    )]) {
+                        sh """
+                            git config --global user.name "Jenkins GitOps"
+                            git config --global user.email "jenkins@yas.local"
+                            
+                            # Cài đặt URL có nhúng token để push
+                            git remote set-url origin https://\${GIT_USER}:\${GIT_TOKEN}@github.com/Nat90711/project-devops-yas.git
+                            
+                            # Đảm bảo chúng ta đang ở nhánh main
+                            git checkout main
+                            
+                            # Xóa nhánh gitops cục bộ nếu có
+                            git branch -D gitops || true
+                            
+                            # Tạo nhánh gitops mới từ main hiện tại
+                            git checkout -b gitops
+                            
+                            # Đóng gói Helm dependencies
+                            helm dependency build k8s/charts/yas-all
+                            
+                            # Force add folder charts (phòng khi bị gitignore)
+                            git add -f k8s/charts/yas-all/charts
+                            
+                            # Commit
+                            git commit -m "chore: update gitops manifests [skip ci]" || true
+                            
+                            # Force push lên nhánh gitops
+                            git push origin gitops -f
+                        """
+                    }
+                }
+            }
+        }
     }
 }
 

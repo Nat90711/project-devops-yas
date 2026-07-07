@@ -9,7 +9,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/Nat90711/project-devops-yas
-    targetRevision: main
+    targetRevision: gitops
     path: k8s/charts/yas-all              # ← SỬA: trỏ vào umbrella chart
     helm:
       valueFiles:

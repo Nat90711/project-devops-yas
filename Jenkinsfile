@@ -152,6 +152,81 @@ pipeline {
                 }
             }
         }
+
+        stage('Detect Changed Services') {
+            steps {
+                script {
+                    // Lấy danh sách toàn bộ các file có thay đổi
+                    def changedFiles = []
+                    try {
+                        if (env.CHANGE_TARGET) {
+                            sh "git fetch --no-tags origin ${env.CHANGE_TARGET}:refs/remotes/origin/${env.CHANGE_TARGET} || true"
+                            def diffStr = sh(script: "git diff --name-only origin/${env.CHANGE_TARGET}...HEAD", returnStdout: true).trim()
+                            if (diffStr) changedFiles.addAll(diffStr.split('\n'))
+                        } else {
+                            sh "git fetch --unshallow || git fetch --depth=50 origin HEAD || true"
+                            def diffStr = sh(script: "git diff --name-only HEAD~1 HEAD", returnStdout: true).trim()
+                            if (diffStr) changedFiles.addAll(diffStr.split('\n'))
+                        }
+                    } catch (Exception e) {
+                        echo "Warning: git diff thất bại"
+                    }
+                    changedFiles.addAll(extractChangedFiles())
+
+                    def allServices = [
+                        'cart','customer','inventory','location','media','order',
+                        'payment','payment-paypal','product','promotion','rating','search','tax',
+                        'recommendation','webhook','storefront-bff','backoffice-bff'
+                    ]
+
+                    env.CHANGED_SERVICES = allServices.findAll { svc ->
+                        changedFiles.any { f -> f.startsWith("${svc}/") || f.startsWith("common-library/") }
+                    }.join(',')
+
+                    echo "Services changed: ${env.CHANGED_SERVICES}"
+                }
+            }
+        }
+
+        stage('Build & Push Image') {
+            when {
+                expression { env.CHANGED_SERVICES != '' }
+            }
+            steps {
+                script {
+                    def commitId = sh(
+                        script: 'git rev-parse HEAD | cut -c1-7',
+                        returnStdout: true
+                    ).trim()
+                    env.COMMIT_ID = commitId
+
+                    withCredentials([usernamePassword(
+                        credentialsId: 'dockerhub-credentials',
+                        usernameVariable: 'DOCKER_USER',
+                        passwordVariable: 'DOCKER_PASS'
+                    )]) {
+                        sh "echo \$DOCKER_PASS | docker login -u \$DOCKER_USER --password-stdin"
+
+                        env.CHANGED_SERVICES.split(',').each { svc ->
+                            sh """
+                                docker build -t ${env.DOCKERHUB_ACCOUNT}/${svc}:${commitId} ./${svc}
+                                docker push ${env.DOCKERHUB_ACCOUNT}/${svc}:${commitId}
+                            """
+                            // Nếu build trên branch main, gắn thêm tag 'latest'
+                            if (env.BRANCH_NAME == 'main') {
+                                sh """
+                                    docker tag ${env.DOCKERHUB_ACCOUNT}/${svc}:${commitId} \
+                                               ${env.DOCKERHUB_ACCOUNT}/${svc}:latest
+                                    docker push ${env.DOCKERHUB_ACCOUNT}/${svc}:latest
+                                """
+                            }
+                        }
+                    }
+                    sh "echo ${commitId} > build-info.txt"
+                    archiveArtifacts artifacts: 'build-info.txt'
+                }
+            }
+        }
     }
 }
 

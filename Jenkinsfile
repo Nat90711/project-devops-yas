@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         // TODO: Đổi thành account Docker Hub của nhóm bạn
-        DOCKERHUB_ACCOUNT = 'your-dockerhub-username' 
+        DOCKERHUB_ACCOUNT = 'tuandaklak' 
     }
 
     tools {

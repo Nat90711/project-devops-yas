@@ -185,7 +185,7 @@ jobs:
             -Dsonar.java.binaries=**/target/classes
             -Dsonar.java.libraries=**/target/dependency/*.jar
             -Dsonar.java.source=25
-            -Dsonar.exclusions=**/src/test/**,**/config/**,**/dto/**,**/entity/**,**/*Exception.java
+            -Dsonar.exclusions=**/src/test/**,**/config/**,**/dto/**,**/entity/**,**/*Exception.java,**/*.jpg,**/*.jpeg,**/*.png,**/*.gif,**/*.ico,**/*.jar,**/*.class,**/wait-for-it.sh
             -Dsonar.text.exclusions=**/.mvn/wrapper/maven-wrapper.jar
 
       - name: SonarQube scan completed

@@ -1,0 +1,6 @@
+# Image tag cho môi trường staging
+# Chỉ cập nhật khi CI phát hiện tag v1.x.x trên branch main
+# Jenkins CI Bot sẽ tự động commit thay đổi vào file này khi có release tag
+global:
+  imageTag: "v1.0.0"
+  imageRepository: "tuandaklak"

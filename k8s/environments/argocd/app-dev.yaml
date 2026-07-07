@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: yas-dev
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/description: "YAS Dev environment - auto synced on every main branch push"
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Nat90711/project-devops-yas
+    targetRevision: main
+    path: k8s/charts
+    helm:
+      valueFiles:
+        - ../environments/dev/values.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: dev
+  syncPolicy:
+    automated:
+      prune: true       # Xóa resource không còn trong manifest
+      selfHeal: true    # Tự fix nếu ai kubectl apply thủ công sai
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true

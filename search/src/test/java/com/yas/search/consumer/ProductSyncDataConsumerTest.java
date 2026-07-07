@@ -79,4 +79,19 @@ class ProductSyncDataConsumerTest {
         // Then
         verify(productSyncDataService, times(1)).deleteProduct(productId);
     }
+
+    @Test
+    void testProcessMessage_shouldExecuteWithoutException() {
+        // Given
+        ProductMsgKey key = ProductMsgKey.builder().id(1L).build();
+        ProductCdcMessage message = ProductCdcMessage.builder()
+                .op(CREATE)
+                .build();
+        org.springframework.messaging.MessageHeaders headers = new org.springframework.messaging.MessageHeaders(java.util.Map.of());
+        
+        // When & Then
+        org.junit.jupiter.api.Assertions.assertDoesNotThrow(() -> 
+            productSyncDataConsumer.processMessage(key, message, headers)
+        );
+    }
 }

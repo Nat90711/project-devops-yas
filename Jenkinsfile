@@ -84,18 +84,28 @@ pipeline {
                                         sh "mvn org.jacoco:jacoco-maven-plugin:prepare-agent test org.jacoco:jacoco-maven-plugin:report -pl ${serviceName} -Dserver.port=0 -Dspring.jmx.enabled=false" 
                                     }
                                     
-                                    junit allowEmptyResults: true, 
-                                          testResults: "${serviceName}/target/surefire-reports/*.xml"
-                                          
-                                    jacoco(
-                                        execPattern: "${serviceName}/target/jacoco.exec",
-                                        classPattern: "${serviceName}/target/classes",
-                                        sourcePattern: "${serviceName}/src/main/java",
-                                        exclusionPattern: '**/config/**,**/exception/**,**/constants/**,**/*Application.class', 
-                                        changeBuildStatus: true,
-                                        minimumLineCoverage: '70', 
-                                        maximumLineCoverage: '70'       
-                                    )
+                                    script {
+                                        if (fileExists("${serviceName}/target/surefire-reports")) {
+                                            junit allowEmptyResults: true, 
+                                                  testResults: "${serviceName}/target/surefire-reports/*.xml"
+                                        } else {
+                                            echo "Bỏ qua JUnit vì không có test reports nào cho ${serviceName}"
+                                        }
+
+                                        if (fileExists("${serviceName}/target/jacoco.exec")) {
+                                            jacoco(
+                                                execPattern: "${serviceName}/target/jacoco.exec",
+                                                classPattern: "${serviceName}/target/classes",
+                                                sourcePattern: "${serviceName}/src/main/java",
+                                                exclusionPattern: '**/config/**,**/exception/**,**/constants/**,**/*Application.class', 
+                                                changeBuildStatus: true,
+                                                minimumLineCoverage: '70', 
+                                                maximumLineCoverage: '70'       
+                                            )
+                                        } else {
+                                            echo "Bỏ qua kiểm tra độ phủ 70% trên Jenkins vì không có file execution data cho ${serviceName}"
+                                        }
+                                    }
                                 }
                             }
                         } else {

@@ -105,28 +105,32 @@ pipeline {
                                 stage("Build & Push Image - ${serviceName}") {
                                     echo "Đang Build & Push Docker image cho service: ${serviceName}..."
                                     script {
-                                        def commitId = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
-                                        
-                                        withCredentials([usernamePassword(
-                                            credentialsId: 'dockerhub-credentials',
-                                            usernameVariable: 'DOCKER_USER',
-                                            passwordVariable: 'DOCKER_PASS'
-                                        )]) {
-                                            sh "echo \$DOCKER_PASS | docker login -u \$DOCKER_USER --password-stdin"
+                                        if (fileExists("${serviceName}/Dockerfile")) {
+                                            def commitId = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
                                             
-                                            // Build và Push image với tag là Commit ID
-                                            sh """
-                                                docker build -t ${env.DOCKERHUB_ACCOUNT}/${serviceName}:${commitId} ./${serviceName}
-                                                docker push ${env.DOCKERHUB_ACCOUNT}/${serviceName}:${commitId}
-                                            """
-                                            
-                                            // Nếu là nhánh main, push thêm tag latest
-                                            if (env.BRANCH_NAME == 'main') {
+                                            withCredentials([usernamePassword(
+                                                credentialsId: 'dockerhub-credentials',
+                                                usernameVariable: 'DOCKER_USER',
+                                                passwordVariable: 'DOCKER_PASS'
+                                            )]) {
+                                                sh "echo \$DOCKER_PASS | docker login -u \$DOCKER_USER --password-stdin"
+                                                
+                                                // Build và Push image với tag là Commit ID
                                                 sh """
-                                                    docker tag ${env.DOCKERHUB_ACCOUNT}/${serviceName}:${commitId} ${env.DOCKERHUB_ACCOUNT}/${serviceName}:latest
-                                                    docker push ${env.DOCKERHUB_ACCOUNT}/${serviceName}:latest
+                                                    docker build -t ${env.DOCKERHUB_ACCOUNT}/${serviceName}:${commitId} ./${serviceName}
+                                                    docker push ${env.DOCKERHUB_ACCOUNT}/${serviceName}:${commitId}
                                                 """
+                                                
+                                                // Nếu là nhánh main, push thêm tag latest
+                                                if (env.BRANCH_NAME == 'main') {
+                                                    sh """
+                                                        docker tag ${env.DOCKERHUB_ACCOUNT}/${serviceName}:${commitId} ${env.DOCKERHUB_ACCOUNT}/${serviceName}:latest
+                                                        docker push ${env.DOCKERHUB_ACCOUNT}/${serviceName}:latest
+                                                    """
+                                                }
                                             }
+                                        } else {
+                                            echo "Bỏ qua build Docker image cho ${serviceName} vì không có Dockerfile."
                                         }
                                     }
                                 }

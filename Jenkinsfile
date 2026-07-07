@@ -2,7 +2,6 @@ pipeline {
     agent any
 
     environment {
-        // TODO: Đổi thành account Docker Hub của nhóm bạn
         DOCKERHUB_ACCOUNT = 'tuandaklak' 
     }
 
@@ -143,7 +142,7 @@ pipeline {
             steps {
                 script {
                     def commitId = sh(
-                        script: 'git rev-parse --short HEAD',
+                        script: 'git rev-parse HEAD | cut -c1-7',
                         returnStdout: true
                     ).trim()
                     env.COMMIT_ID = commitId

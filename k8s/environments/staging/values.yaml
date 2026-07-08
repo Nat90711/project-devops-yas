@@ -10,6 +10,24 @@ swagger-ui:
   ingress:
     enabled: false
 
+storefront-bff:
+  ingress:
+    enabled: true
+    hosts:
+      - host: staging-storefront.yas.local.com
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+
+backoffice-bff:
+  ingress:
+    enabled: true
+    hosts:
+      - host: staging-backoffice.yas.local.com
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+
 # Kiểm soát RAM theo QUY_TAC_RAM_K8S.md
 rating:
   backend:

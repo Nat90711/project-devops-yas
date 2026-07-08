@@ -9,11 +9,11 @@ spec:
   project: default
   source:
     repoURL: https://github.com/Nat90711/project-devops-yas
-    targetRevision: main
-    path: k8s/charts
+    targetRevision: gitops
+    path: k8s/charts/yas-all
     helm:
       valueFiles:
-        - ../environments/staging/values.yaml
+        - ../../environments/staging/values.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: staging

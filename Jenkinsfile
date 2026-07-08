@@ -30,7 +30,7 @@ pipeline {
                         def line = lines[j].trim()
                         if (line.startsWith('<module>') && line.endsWith('</module>')) {
                             def moduleName = line.substring(8, line.length() - 9)
-                            if (moduleName != 'common-library') {
+                            if (moduleName != 'common-library' && moduleName != 'payment-paypal') {
                                 services.add(moduleName)
                             }
                         }

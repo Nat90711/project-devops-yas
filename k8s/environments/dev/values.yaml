@@ -3,3 +3,47 @@
 global:
   imageTag: "latest"
   imageRepository: "tuandaklak"
+
+# Kiểm soát RAM theo QUY_TAC_RAM_K8S.md
+rating:
+  backend:
+    replicaCount: 0
+
+recommendation:
+  backend:
+    replicaCount: 0
+
+webhook:
+  backend:
+    replicaCount: 0
+
+sampledata:
+  backend:
+    replicaCount: 0
+
+location:
+  backend:
+    replicaCount: 0
+
+# Tắt Ingress của swagger-ui để tránh conflict với production (yas)
+swagger-ui:
+  ingress:
+    enabled: false
+
+storefront-bff:
+  ingress:
+    enabled: true
+    hosts:
+      - host: dev-storefront.yas.local.com
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+
+backoffice-bff:
+  ingress:
+    enabled: true
+    hosts:
+      - host: dev-backoffice.yas.local.com
+        paths:
+          - path: /
+            pathType: ImplementationSpecific

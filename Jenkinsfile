@@ -149,7 +149,7 @@ pipeline {
                     env.COMMIT_ID = commitId
 
                     withCredentials([usernamePassword(
-                        credentialsId: 'dockerhub-credentials',
+                        credentialsId: 'github-token-new',
                         usernameVariable: 'DOCKER_USER',
                         passwordVariable: 'DOCKER_PASS'
                     )]) {

@@ -211,8 +211,8 @@ pipeline {
                             helm dependency build k8s/charts/yas-all
                             
                             # Cập nhật imageTag cho các môi trường bằng COMMIT_ID mới nhất
-                            sed -i 's/imageTag: .*/imageTag: "'\${env.COMMIT_ID}'"/g' k8s/environments/dev/values.yaml
-                            sed -i 's/imageTag: .*/imageTag: "'\${env.COMMIT_ID}'"/g' k8s/environments/staging/values.yaml
+                            sed -i 's/imageTag: .*/imageTag: "'${env.COMMIT_ID}'"/g' k8s/environments/dev/values.yaml
+                            sed -i 's/imageTag: .*/imageTag: "'${env.COMMIT_ID}'"/g' k8s/environments/staging/values.yaml
                             
                             # Force add folder charts (phòng khi bị gitignore)
                             git add -f k8s/charts/yas-all/charts

@@ -32,6 +32,10 @@ swagger-ui:
 
 storefront-bff:
   backend:
+    hostAliases:
+      - ip: "10.99.35.97"
+        hostnames:
+          - "identity.yas.local.com"
     ingress:
       enabled: true
       host: dev-storefront.yas.local.com
@@ -39,7 +43,25 @@ storefront-bff:
 
 backoffice-bff:
   backend:
+    hostAliases:
+      - ip: "10.99.35.97"
+        hostnames:
+          - "identity.yas.local.com"
     ingress:
       enabled: true
       host: dev-backoffice.yas.local.com
       path: /
+
+storefront-ui:
+  backend:
+    hostAliases:
+      - ip: "10.99.35.97"
+        hostnames:
+          - "identity.yas.local.com"
+
+backoffice-ui:
+  backend:
+    hostAliases:
+      - ip: "10.99.35.97"
+        hostnames:
+          - "identity.yas.local.com"

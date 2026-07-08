@@ -1,7 +1,7 @@
 # Image tag mặc định cho môi trường dev
 # File này sẽ được Jenkins CI Bot tự động cập nhật sau mỗi lần build thành công trên branch main
 global:
-  imageTag: "latest"
+  imageTag: "95ac2d1"
   imageRepository: "tuandaklak"
 
 # Kiểm soát RAM theo QUY_TAC_RAM_K8S.md

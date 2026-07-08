@@ -2,7 +2,7 @@
 # Chỉ cập nhật khi CI phát hiện tag v1.x.x trên branch main
 # Jenkins CI Bot sẽ tự động commit thay đổi vào file này khi có release tag
 global:
-  imageTag: "v1.0.0"
+  imageTag: "95ac2d1"
   imageRepository: "tuandaklak"
 
 # Tắt Ingress của swagger-ui để tránh conflict với production (yas)

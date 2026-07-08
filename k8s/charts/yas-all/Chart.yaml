@@ -24,9 +24,6 @@ dependencies:
   - name: payment
     version: 0.2.0
     repository: "file://../payment"
-  - name: payment-paypal
-    version: 0.2.0
-    repository: "file://../payment-paypal"
   - name: search
     version: 0.1.0
     repository: "file://../search"

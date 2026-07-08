@@ -203,7 +203,14 @@ pipeline {
                             # Tạo nhánh gitops mới từ main hiện tại
                             git checkout -b gitops
                             
-                            # Đóng gói Helm dependencies
+                            # Đóng gói Helm dependencies cho các subcharts trước (product, order...)
+                            for dir in k8s/charts/*/; do
+                                if [ -f "\$dir/Chart.yaml" ] && [ "\$(basename \$dir)" != "yas-all" ]; then
+                                    helm dependency build "\$dir"
+                                fi
+                            done
+                            
+                            # Đóng gói Helm dependency cho umbrella chart cuối cùng
                             helm dependency build k8s/charts/yas-all
                             
                             # Force add folder charts (phòng khi bị gitignore)

@@ -1,0 +1,111 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-api-config
+  namespace: dev
+data:
+  default.conf: |
+    server {
+      listen 80;
+
+      # Kubernetes CoreDNS
+      resolver kube-dns.kube-system.svc.cluster.local valid=10s;
+
+      proxy_http_version 1.1;
+      proxy_set_header Connection "";
+
+      location /media/ {
+        proxy_pass http://media;
+      }
+      location /swagger-ui/ {
+        proxy_pass http://swagger-ui:8080;
+      }
+      location /product/ {
+        proxy_pass http://product;
+      }
+      location /customer/ {
+        proxy_pass http://customer;
+      }
+      location /cart/ {
+        proxy_pass http://cart;
+      }
+      location /rating/ {
+        proxy_pass http://rating;
+      }
+      location /order/ {
+        proxy_pass http://order;
+      }
+      location /location/ {
+        proxy_pass http://location;
+      }
+      location /inventory/ {
+        proxy_pass http://inventory;
+      }
+      location /tax/ {
+        proxy_pass http://tax;
+      }
+      location /promotion/ {
+        proxy_pass http://promotion;
+      }
+      location /search/ {
+        set $docker_search_host "search";
+        proxy_pass http://$docker_search_host;
+      }
+      location /payment/ {
+        proxy_pass http://payment;
+      }
+      location /webhook/ {
+        set $docker_webhook_host "webhook";
+        proxy_pass http://$docker_webhook_host;
+      }
+      location /sampledata/ {
+        proxy_pass http://sampledata;
+      }
+      location /recommendation/ {
+        set $docker_recommendation_host "recommendation";
+        proxy_pass http://$docker_recommendation_host;
+      }
+    }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-api-gateway
+  namespace: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-api-gateway
+  template:
+    metadata:
+      labels:
+        app: nginx-api-gateway
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.25.3-alpine
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: nginx-config-volume
+              mountPath: /etc/nginx/conf.d/default.conf
+              subPath: default.conf
+      volumes:
+        - name: nginx-config-volume
+          configMap:
+            name: nginx-api-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+  namespace: dev
+spec:
+  selector:
+    app: nginx-api-gateway
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+---

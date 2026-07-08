@@ -149,7 +149,7 @@ pipeline {
                     env.COMMIT_ID = commitId
 
                     withCredentials([usernamePassword(
-                        credentialsId: 'github-token-new',
+                        credentialsId: 'dockerhub-credentials',
                         usernameVariable: 'DOCKER_USER',
                         passwordVariable: 'DOCKER_PASS'
                     )]) {
@@ -183,7 +183,7 @@ pipeline {
             steps {
                 script {
                     withCredentials([usernamePassword(
-                        credentialsId: 'Jenkins_YAS',
+                        credentialsId: 'github-token-new',
                         usernameVariable: 'GIT_USER',
                         passwordVariable: 'GIT_TOKEN'
                     )]) {

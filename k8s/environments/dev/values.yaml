@@ -31,19 +31,15 @@ swagger-ui:
     enabled: false
 
 storefront-bff:
-  ingress:
-    enabled: true
-    hosts:
-      - host: dev-storefront.yas.local.com
-        paths:
-          - path: /
-            pathType: ImplementationSpecific
+  backend:
+    ingress:
+      enabled: true
+      host: dev-storefront.yas.local.com
+      path: /
 
 backoffice-bff:
-  ingress:
-    enabled: true
-    hosts:
-      - host: dev-backoffice.yas.local.com
-        paths:
-          - path: /
-            pathType: ImplementationSpecific
+  backend:
+    ingress:
+      enabled: true
+      host: dev-backoffice.yas.local.com
+      path: /

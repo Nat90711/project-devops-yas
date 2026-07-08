@@ -194,13 +194,10 @@ pipeline {
                             # Cài đặt URL có nhúng token để push
                             git remote set-url origin https://\${GIT_USER}:\${GIT_TOKEN}@github.com/Nat90711/project-devops-yas.git
                             
-                            # Đảm bảo chúng ta đang ở nhánh main
-                            git checkout main
-                            
                             # Xóa nhánh gitops cục bộ nếu có
                             git branch -D gitops || true
                             
-                            # Tạo nhánh gitops mới từ main hiện tại
+                            # Tạo và chuyển thẳng sang nhánh gitops từ trạng thái Detached HEAD hiện tại
                             git checkout -b gitops
                             
                             # Đóng gói Helm dependencies cho các subcharts trước (product, order...)

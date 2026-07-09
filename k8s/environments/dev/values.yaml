@@ -65,3 +65,8 @@ backoffice-ui:
       - ip: "10.99.35.97"
         hostnames:
           - "identity.yas.local.com"
+
+yas-configuration:
+  mediaApplicationConfig:
+    yas:
+      publicUrl: http://dev-api.yas.local.com/media

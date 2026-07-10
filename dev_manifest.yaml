@@ -1,0 +1,2843 @@
+---
+# Source: yas-all/charts/backoffice-bff/charts/backend/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: backoffice-bff
+  labels:
+    helm.sh/chart: backend-0.1.0
+    app.kubernetes.io/name: backoffice-bff
+    app.kubernetes.io/instance: yas-dev
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/managed-by: Helm
+---
+# Source: yas-all/charts/backoffice-ui/charts/ui/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: backoffice-ui
+  labels:
+    helm.sh/chart: ui-0.1.0
+    app.kubernetes.io/name: backoffice-ui
+    app.kubernetes.io/instance: yas-dev
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/managed-by: Helm
+---
+# Source: yas-all/charts/cart/charts/backend/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: cart
+  labels:
+    helm.sh/chart: backend-0.1.0
+    app.kubernetes.io/name: cart
+    app.kubernetes.io/instance: yas-dev
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/managed-by: Helm
+---
+# Source: yas-all/charts/customer/charts/backend/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: customer
+  labels:
+    helm.sh/chart: backend-0.1.0
+    app.kubernetes.io/name: customer
+    app.kubernetes.io/instance: yas-dev
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/managed-by: Helm
+---
+# Source: yas-all/charts/inventory/charts/backend/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: inventory
+  labels:
+    helm.sh/chart: backend-0.1.0
+    app.kubernetes.io/name: inventory
+    app.kubernetes.io/instance: yas-dev
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/managed-by: Helm
+---
+# Source: yas-all/charts/media/charts/backend/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: media
+  labels:
+    helm.sh/chart: backend-0.1.0
+    app.kubernetes.io/name: media
+    app.kubernetes.io/instance: yas-dev
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/managed-by: Helm
+---
+# Source: yas-all/charts/order/charts/backend/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: order
+  labels:
+    helm.sh/chart: backend-0.1.0
+    app.kubernetes.io/name: order
+    app.kubernetes.io/instance: yas-dev
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/managed-by: Helm
+---
+# Source: yas-all/charts/payment-paypal/charts/backend/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: payment-paypal
+  labels:
+    helm.sh/chart: backend-0.1.0
+    app.kubernetes.io/name: payment-paypal
+    app.kubernetes.io/instance: yas-dev
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/managed-by: Helm
+---
+# Source: yas-all/charts/payment/charts/backend/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: payment
+  labels:
+    helm.sh/chart: backend-0.1.0
+    app.kubernetes.io/name: payment
+    app.kubernetes.io/instance: yas-dev
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/managed-by: Helm
+---
+# Source: yas-all/charts/product/charts/backend/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: product
+  labels:
+    helm.sh/chart: backend-0.1.0
+    app.kubernetes.io/name: product
+    app.kubernetes.io/instance: yas-dev
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/managed-by: Helm
+---
+# Source: yas-all/charts/promotion/charts/backend/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: promotion
+  labels:
+    helm.sh/chart: backend-0.1.0
+    app.kubernetes.io/name: promotion
+    app.kubernetes.io/instance: yas-dev
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/managed-by: Helm
+---
+# Source: yas-all/charts/search/charts/backend/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: search
+  labels:
+    helm.sh/chart: backend-0.1.0
+    app.kubernetes.io/name: search
+    app.kubernetes.io/instance: yas-dev
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/managed-by: Helm
+---
+# Source: yas-all/charts/storefront-bff/charts/backend/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: storefront-bff
+  labels:
+    helm.sh/chart: backend-0.1.0
+    app.kubernetes.io/name: storefront-bff
+    app.kubernetes.io/instance: yas-dev
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/managed-by: Helm
+---
+# Source: yas-all/charts/storefront-ui/charts/ui/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: storefront-ui
+  labels:
+    helm.sh/chart: ui-0.1.0
+    app.kubernetes.io/name: storefront-ui
+    app.kubernetes.io/instance: yas-dev
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/managed-by: Helm
+---
+# Source: yas-all/charts/swagger-ui/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: yas-dev-swagger-ui
+  labels:
+    helm.sh/chart: swagger-ui-0.1.0
+    app.kubernetes.io/name: swagger-ui
+    app.kubernetes.io/instance: yas-dev
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/managed-by: Helm
+---
+# Source: yas-all/charts/tax/charts/backend/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: tax
+  labels:
+    helm.sh/chart: backend-0.1.0
+    app.kubernetes.io/name: tax
+    app.kubernetes.io/instance: yas-dev
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/managed-by: Helm
+---
+# Source: yas-all/charts/yas-configuration/charts/reloader/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  annotations:
+    meta.helm.sh/release-namespace: "default"
+    meta.helm.sh/release-name: "yas-dev"
+  labels:
+    app: yas-reloader
+    chart: "reloader-1.0.29"
+    release: "yas-dev"
+    heritage: "Helm"
+    app.kubernetes.io/managed-by: "Helm"
+  name: yas-reloader
+  namespace: default
+---
+# Source: yas-all/charts/yas-configuration/templates/yas-credentials.secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: yas-postgresql-credentials-secret
+  annotations:
+    reloader.stakater.com/match: "true"
+type: Opaque
+data:
+  POSTGRESQL_USERNAME: eWFzYWRtaW51c2Vy
+  POSTGRESQL_PASSWORD: YWRtaW4=
+---
+# Source: yas-all/charts/yas-configuration/templates/yas-credentials.secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: yas-elasticsearch-credentials-secret
+  annotations:
+    reloader.stakater.com/match: "true"
+type: Opaque
+data:
+  ELASTICSEARCH_USERNAME: eWFz
+  ELASTICSEARCH_PASSWORD: TGFyVW1CM0E0OU5UZzlZbWdXND0=
+---
+# Source: yas-all/charts/yas-configuration/templates/yas-credentials.secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: yas-keycloak-credentials-secret
+  annotations:
+    reloader.stakater.com/match: "true"
+type: Opaque
+data:
+  KEYCLOAK_BACKOFFICE_BFF_CLIENT_SECRET: VFZhY0xDMGNROHRpaUVLaVRWZXJUYjJZdndRMVRSSkY=
+  KEYCLOAK_STOREFRONT_BFF_CLIENT_SECRET: WnJVOUkwcTJ1WEJnbEJubXZ5SmRrbDFsZjBuY3I4dG4=
+  KEYCLOAK_CUSTOMER_MANAGEMENT_CLIENT_SECRET: TktBcjNybmp3bTlqbGFrZ0twZWx1a1pHRmFIWXFJV0U=
+---
+# Source: yas-all/charts/yas-configuration/templates/yas-credentials.secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: yas-redis-credentials-secret
+  annotations:
+    reloader.stakater.com/match: "true"
+type: Opaque
+data:
+  REDIS_PASSWORD: cmVkaXM=
+---
+# Source: yas-all/charts/yas-configuration/templates/yas-credentials.secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: yas-openai-api-key-secret
+  annotations:
+    reloader.stakater.com/match: "true"
+type: Opaque
+data:
+  OPENAI_API_KEY: dXBkYXRlLW1l
+---
+# Source: yas-all/charts/storefront-bff/templates/storefront-bff.configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: storefront-bff-configmap
+  annotations:
+    reloader.stakater.com/match: "true"
+data:
+  backoffice-bff-application.yaml: |
+    null
+---
+# Source: yas-all/charts/yas-configuration/templates/yas-configurations.configmap.yaml
+#Configmap of general application config for all microservices
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: yas-configuration-configmap
+  annotations:
+    reloader.stakater.com/match: "true"
+data:
+  application.yaml: |
+    logging:
+      pattern:
+        level: application=${spring.application.name} traceId=%X{traceId:-} spanId=%X{spanId:-}
+          level=%level
+    management:
+      endpoint:
+        health:
+          probes:
+            enabled: true
+          show-details: always
+      endpoints:
+        web:
+          exposure:
+            include: prometheus, health
+      health:
+        livenessstate:
+          enabled: true
+        readinessstate:
+          enabled: true
+      metrics:
+        tags:
+          application: ${spring.application.name}
+      otlp:
+        tracing:
+          endpoint: http://opentelemetry-collector.observability:4318/v1/traces
+      server:
+        port: 8090
+      tracing:
+        sampling:
+          probability: 1
+    server:
+      port: 80
+      shutdown: graceful
+    spring:
+      datasource:
+        password: ${POSTGRESQL_PASSWORD}
+        url: null
+        username: ${POSTGRESQL_USERNAME}
+      kafka:
+        bootstrap-servers: kafka-cluster-kafka-brokers.kafka:9092
+        consumer:
+          bootstrap-servers: kafka-cluster-kafka-brokers.kafka:9092
+      lifecycle:
+        timeout-per-shutdown-phase: 30s
+      security:
+        oauth2:
+          resourceserver:
+            jwt:
+              issuer-uri: http://identity.yas.local.com/realms/Yas
+    springdoc:
+      oauthflow:
+        authorization-url: http://identity.yas.local.com/realms/Yas/protocol/openid-connect/auth
+        token-url: http://identity.yas.local.com/realms/Yas/protocol/openid-connect/token
+    yas:
+      services:
+        cart: http://cart/cart
+        customer: http://customer/customer
+        inventory: http://inventory/inventory
+        location: http://location/location
+        media: http://media/media
+        order: http://order/order
+        payment: http://payment/payment
+        payment-paypal: http://payment-paypal/payment-paypal
+        product: http://product/product
+        promotion: http://promotion/promotion
+        rating: http://rating/rating
+        recommendation: http://recommendation/recommendation
+        sampledata: http://sampledata/sampledata
+        search: http://search/search
+        tax: http://tax/tax
+  logback.xml: |
+    <?xml version="1.0" encoding="UTF-8" ?>
+    <Configuration>
+        <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+        <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
+        <property name="LOG_LEVEL" value="${LOG_LEVEL:-INFO}"/>
+        <root level="INFO">
+            <appender-ref ref="CONSOLE" />
+        </root>
+        <logger name="com.yas" level="${LOG_LEVEL}" additivity="false">
+            <appender-ref ref="CONSOLE" />
+        </logger>
+    </Configuration>
+---
+# Source: yas-all/charts/yas-configuration/templates/yas-configurations.configmap.yaml
+#Configmap of gateway routes config for bff microservices
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: yas-gateway-routes-config-configmap
+  annotations:
+    reloader.stakater.com/match: "true"
+data:
+  gateway-routes-config.yaml: |
+    spring:
+      cloud:
+        gateway:
+          routes:
+          - filters:
+            - RewritePath=/api/(?<segment>.*), /$\{segment}
+            - TokenRelay=
+            id: product_api
+            predicates:
+            - Path=/api/product/**
+            uri: http://product
+          - filters:
+            - RewritePath=/api/(?<segment>.*), /$\{segment}
+            - TokenRelay=
+            id: location_api
+            predicates:
+            - Path=/api/location/**
+            uri: http://location
+          - filters:
+            - RewritePath=/api/(?<segment>.*), /$\{segment}
+            - TokenRelay=
+            id: inventory_api
+            predicates:
+            - Path=/api/inventory/**
+            uri: http://inventory
+          - filters:
+            - RewritePath=/api/(?<segment>.*), /$\{segment}
+            - TokenRelay=
+            id: cart_api
+            predicates:
+            - Path=/api/cart/**
+            uri: http://cart
+          - filters:
+            - RewritePath=/api/(?<segment>.*), /$\{segment}
+            - TokenRelay=
+            id: customer_api
+            predicates:
+            - Path=/api/customer/**
+            uri: http://customer
+          - filters:
+            - RewritePath=/api/(?<segment>.*), /$\{segment}
+            - TokenRelay=
+            id: media_api
+            predicates:
+            - Path=/api/media/**
+            uri: http://media
+          - filters:
+            - RewritePath=/api/(?<segment>.*), /$\{segment}
+            - TokenRelay=
+            id: rating_api
+            predicates:
+            - Path=/api/rating/**
+            uri: http://rating
+          - filters:
+            - RewritePath=/api/(?<segment>.*), /$\{segment}
+            - TokenRelay=
+            id: tax_api
+            predicates:
+            - Path=/api/tax/**
+            uri: http://tax
+          - filters:
+            - RewritePath=/api/(?<segment>.*), /$\{segment}
+            - TokenRelay=
+            id: promotion_api
+            predicates:
+            - Path=/api/promotion/**
+            uri: http://protion
+          - filters:
+            - RewritePath=/api/(?<segment>.*), /$\{segment}
+            - TokenRelay=
+            id: search_api
+            predicates:
+            - Path=/api/search/**
+            uri: http://search
+          - filters:
+            - RewritePath=/api/(?<segment>.*), /$\{segment}
+            - TokenRelay=
+            id: order_api
+            predicates:
+            - Path=/api/order/**
+            uri: http://order
+          - filters:
+            - RewritePath=/api/(?<segment>.*), /$\{segment}
+            - TokenRelay=
+            id: recommendation_api
+            predicates:
+            - Path=/api/recommendation/**
+            uri: http://recommendation
+          - filters:
+            - RewritePath=/api/(?<segment>.*), /$\{segment}
+            - TokenRelay=
+            id: webhook_api
+            predicates:
+            - Path=/api/webhook/**
+            uri: http://webhook
+          - filters:
+            - RewritePath=/api/(?<segment>.*), /$\{segment}
+            - TokenRelay=
+            id: sampledata_api
+            predicates:
+            - Path=/api/sampledata/**
+            uri: http://sampledata
+          - id: ui
+            predicates:
+            - Path=/**
+            uri: ${UI_HOST}
+---
+# Source: yas-all/charts/yas-configuration/templates/yas-configurations.configmap.yaml
+#Configmap for backoffice-bff extra
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backoffice-bff-extra-configmap
+  annotations:
+    reloader.stakater.com/match: "true"
+data:
+  backoffice-bff-extra-config.yaml: |
+    spring:
+      data:
+        redis:
+          host: redis-master.redis
+          password: ${REDIS_PASSWORD}
+          port: 6379
+      security:
+        oauth2:
+          client:
+            provider:
+              keycloak:
+                issuer-uri: http://identity.yas.local.com/realms/Yas
+            registration:
+              api-client:
+                client-id: backoffice-bff
+                client-secret: ${KEYCLOAK_BACKOFFICE_BFF_CLIENT_SECRET}
+                provider: keycloak
+                scope: openid, profile, email, roles
+---
+# Source: yas-all/charts/yas-configuration/templates/yas-configurations.configmap.yaml
+#Configmap for storefront-bff extra
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: storefront-bff-extra-configmap
+  annotations:
+    reloader.stakater.com/match: "true"
+data:
+  storefront-bff-extra-config.yaml: |
+    spring:
+      data:
+        redis:
+          host: redis-master.redis
+          password: ${REDIS_PASSWORD}
+          port: 6379
+      security:
+        oauth2:
+          client:
+            provider:
+              keycloak:
+                issuer-uri: http://identity.yas.local.com/realms/Yas
+            registration:
+              api-client:
+                client-id: storefront-bff
+                client-secret: ${KEYCLOAK_STOREFRONT_BFF_CLIENT_SECRET}
+                provider: keycloak
+                scope: openid, profile, email, roles
+---
+# Source: yas-all/charts/yas-configuration/templates/yas-configurations.configmap.yaml
+# Configmap for media application config custom
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: media-application-configmap
+  annotations:
+    reloader.stakater.com/match: "true"
+data:
+  media-application.yaml: |
+    server:
+      servlet:
+        context-path: /media
+    yas:
+      publicUrl: http://api.yas.local.com/media
+---
+# Source: yas-all/charts/yas-configuration/templates/yas-configurations.configmap.yaml
+#Configmap for customer application config custom
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: customer-application-configmap
+  annotations:
+    reloader.stakater.com/match: "true"
+data:
+  customer-application.yaml: |
+    
+    keycloak:
+      auth-server-url: http://identity.yas.local.com
+      credentials:
+        secret: ${KEYCLOAK_CUSTOMER_MANAGEMENT_CLIENT_SECRET}
+      realm: Yas
+      resource: customer-management
+---
+# Source: yas-all/charts/yas-configuration/templates/yas-configurations.configmap.yaml
+# Configmap of search application config custom
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: search-application-configmap
+  annotations:
+    reloader.stakater.com/match: "true"
+data:
+  search-application.yaml: |
+    
+    elasticsearch:
+      password: ${ELASTICSEARCH_PASSWORD}
+      url: elasticsearch-es-http.elasticsearch
+      username: ${ELASTICSEARCH_USERNAME}
+---
+# Source: yas-all/charts/yas-configuration/templates/yas-configurations.configmap.yaml
+# Configmap of cart application config custom
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cart-application-configmap
+  annotations:
+    reloader.stakater.com/match: "true"
+data:
+  cart-application.yaml: |
+    
+    null
+---
+# Source: yas-all/charts/yas-configuration/templates/yas-configurations.configmap.yaml
+# Configmap of order application config custom
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: order-application-configmap
+  annotations:
+    reloader.stakater.com/match: "true"
+data:
+  order-application.yaml: |
+    
+    null
+---
+# Source: yas-all/charts/yas-configuration/templates/yas-configurations.configmap.yaml
+# Configmap of payment application config custom
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: payment-application-configmap
+  annotations:
+    reloader.stakater.com/match: "true"
+data:
+  payment-application.yaml: |
+    
+    null
+---
+# Source: yas-all/charts/yas-configuration/templates/yas-configurations.configmap.yaml
+# Configmap of payment-paypal application config custom
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: payment-paypal-application-configmap
+  annotations:
+    reloader.stakater.com/match: "true"
+data:
+  payment-paypal-application.yaml: |
+    
+    yas:
+      public:
+        url: http://storefront.yas.local.com/complete-payment
+---
+# Source: yas-all/charts/yas-configuration/templates/yas-configurations.configmap.yaml
+# Configmap of production application config custom
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: product-application-configmap
+  annotations:
+    reloader.stakater.com/match: "true"
+data:
+  product-application.yaml: |
+    
+    null
+---
+# Source: yas-all/charts/yas-configuration/templates/yas-configurations.configmap.yaml
+# Configmap of recommendation application config custom
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: recommendation-application-configmap
+  annotations:
+    reloader.stakater.com/match: "true"
+data:
+  recommendation-application.yaml: |
+    
+    spring:
+      ai:
+        azure:
+          openai:
+            api-key: ${OPENAI_API_KEY}
+            embedding:
+              options:
+                model: text-embedding-3-small
+            endpoint: https://product-recommendation.openai.azure.com
+---
+# Source: yas-all/charts/yas-configuration/templates/yas-configurations.configmap.yaml
+# Configmap of sampledata application config custom
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sampledata-application-configmap
+  annotations:
+    reloader.stakater.com/match: "true"
+data:
+  sampledata-application.yaml: |
+    
+    spring:
+      datasource:
+        media:
+          url: jdbc:postgresql://postgresql.postgres:5432/media
+        product:
+          url: jdbc:postgresql://postgresql.postgres:5432/product
+---
+# Source: yas-all/charts/yas-configuration/charts/reloader/templates/role.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+
+kind: Role
+metadata:
+  annotations:
+    meta.helm.sh/release-namespace: "default"
+    meta.helm.sh/release-name: "yas-dev"
+  labels:
+    app: yas-reloader
+    chart: "reloader-1.0.29"
+    release: "yas-dev"
+    heritage: "Helm"
+    app.kubernetes.io/managed-by: "Helm"
+  name: yas-reloader-role
+  namespace: default
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - secrets
+      - configmaps
+    verbs:
+      - list
+      - get
+      - watch
+  - apiGroups:
+      - "apps"
+    resources:
+      - deployments
+      - daemonsets
+      - statefulsets
+    verbs:
+      - list
+      - get
+      - update
+      - patch
+  - apiGroups:
+      - "extensions"
+    resources:
+      - deployments
+      - daemonsets
+    verbs:
+      - list
+      - get
+      - update
+      - patch
+  - apiGroups:
+      - ""
+    resources:
+      - events
+    verbs:
+      - create
+      - patch
+---
+# Source: yas-all/charts/yas-configuration/charts/reloader/templates/rolebinding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+
+kind: RoleBinding
+metadata:
+  annotations:
+    meta.helm.sh/release-namespace: "default"
+    meta.helm.sh/release-name: "yas-dev"
+  labels:
+    app: yas-reloader
+    chart: "reloader-1.0.29"
+    release: "yas-dev"
+    heritage: "Helm"
+    app.kubernetes.io/managed-by: "Helm"
+  name: yas-reloader-role-binding
+  namespace: default
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: yas-reloader-role
+subjects:
+  - kind: ServiceAccount
+    name: yas-reloader
+    namespace: default
+---
+# Source: yas-all/charts/backoffice-bff/charts/backend/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: backoffice-bff
+  labels:
+    helm.sh/chart: backend-0.1.0
+    app.kubernetes.io/name: backoffice-bff
+    app.kubernetes.io/instance: yas-dev
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: http
+      protocol: TCP
+      name: http
+    - port: 8090
+      targetPort: metric
+      protocol: TCP
+      name: metric
+  selector:
+    app.kubernetes.io/name: backoffice-bff
+    app.kubernetes.io/instance: yas-dev
+---
+# Source: yas-all/charts/backoffice-ui/charts/ui/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: backoffice-ui
+  labels:
+    helm.sh/chart: ui-0.1.0
+    app.kubernetes.io/name: backoffice-ui
+    app.kubernetes.io/instance: yas-dev
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  type: ClusterIP
+  ports:
+    - port: 3000
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: backoffice-ui
+    app.kubernetes.io/instance: yas-dev
+---
+# Source: yas-all/charts/cart/charts/backend/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: cart
+  labels:
+    helm.sh/chart: backend-0.1.0
+    app.kubernetes.io/name: cart
+    app.kubernetes.io/instance: yas-dev
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: http
+      protocol: TCP
+      name: http
+    - port: 8090
+      targetPort: metric
+      protocol: TCP
+      name: metric
+  selector:
+    app.kubernetes.io/name: cart
+    app.kubernetes.io/instance: yas-dev
+---
+# Source: yas-all/charts/customer/charts/backend/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: customer
+  labels:
+    helm.sh/chart: backend-0.1.0
+    app.kubernetes.io/name: customer
+    app.kubernetes.io/instance: yas-dev
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: http
+      protocol: TCP
+      name: http
+    - port: 8090
+      targetPort: metric
+      protocol: TCP
+      name: metric
+  selector:
+    app.kubernetes.io/name: customer
+    app.kubernetes.io/instance: yas-dev
+---
+# Source: yas-all/charts/inventory/charts/backend/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory
+  labels:
+    helm.sh/chart: backend-0.1.0
+    app.kubernetes.io/name: inventory
+    app.kubernetes.io/instance: yas-dev
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: http
+      protocol: TCP
+      name: http
+    - port: 8090
+      targetPort: metric
+      protocol: TCP
+      name: metric
+  selector:
+    app.kubernetes.io/name: inventory
+    app.kubernetes.io/instance: yas-dev
+---
+# Source: yas-all/charts/media/charts/backend/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: media
+  labels:
+    helm.sh/chart: backend-0.1.0
+    app.kubernetes.io/name: media
+    app.kubernetes.io/instance: yas-dev
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: http
+      protocol: TCP
+      name: http
+    - port: 8090
+      targetPort: metric
+      protocol: TCP
+      name: metric
+  selector:
+    app.kubernetes.io/name: media
+    app.kubernetes.io/instance: yas-dev
+---
+# Source: yas-all/charts/order/charts/backend/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: order
+  labels:
+    helm.sh/chart: backend-0.1.0
+    app.kubernetes.io/name: order
+    app.kubernetes.io/instance: yas-dev
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: http
+      protocol: TCP
+      name: http
+    - port: 8090
+      targetPort: metric
+      protocol: TCP
+      name: metric
+  selector:
+    app.kubernetes.io/name: order
+    app.kubernetes.io/instance: yas-dev
+---
+# Source: yas-all/charts/payment-paypal/charts/backend/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: payment-paypal
+  labels:
+    helm.sh/chart: backend-0.1.0
+    app.kubernetes.io/name: payment-paypal
+    app.kubernetes.io/instance: yas-dev
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: http
+      protocol: TCP
+      name: http
+    - port: 8090
+      targetPort: metric
+      protocol: TCP
+      name: metric
+  selector:
+    app.kubernetes.io/name: payment-paypal
+    app.kubernetes.io/instance: yas-dev
+---
+# Source: yas-all/charts/payment/charts/backend/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: payment
+  labels:
+    helm.sh/chart: backend-0.1.0
+    app.kubernetes.io/name: payment
+    app.kubernetes.io/instance: yas-dev
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: http
+      protocol: TCP
+      name: http
+    - port: 8090
+      targetPort: metric
+      protocol: TCP
+      name: metric
+  selector:
+    app.kubernetes.io/name: payment
+    app.kubernetes.io/instance: yas-dev
+---
+# Source: yas-all/charts/product/charts/backend/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: product
+  labels:
+    helm.sh/chart: backend-0.1.0
+    app.kubernetes.io/name: product
+    app.kubernetes.io/instance: yas-dev
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: http
+      protocol: TCP
+      name: http
+    - port: 8090
+      targetPort: metric
+      protocol: TCP
+      name: metric
+  selector:
+    app.kubernetes.io/name: product
+    app.kubernetes.io/instance: yas-dev
+---
+# Source: yas-all/charts/promotion/charts/backend/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: promotion
+  labels:
+    helm.sh/chart: backend-0.1.0
+    app.kubernetes.io/name: promotion
+    app.kubernetes.io/instance: yas-dev
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: http
+      protocol: TCP
+      name: http
+    - port: 8090
+      targetPort: metric
+      protocol: TCP
+      name: metric
+  selector:
+    app.kubernetes.io/name: promotion
+    app.kubernetes.io/instance: yas-dev
+---
+# Source: yas-all/charts/search/charts/backend/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: search
+  labels:
+    helm.sh/chart: backend-0.1.0
+    app.kubernetes.io/name: search
+    app.kubernetes.io/instance: yas-dev
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: http
+      protocol: TCP
+      name: http
+    - port: 8090
+      targetPort: metric
+      protocol: TCP
+      name: metric
+  selector:
+    app.kubernetes.io/name: search
+    app.kubernetes.io/instance: yas-dev
+---
+# Source: yas-all/charts/storefront-bff/charts/backend/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: storefront-bff
+  labels:
+    helm.sh/chart: backend-0.1.0
+    app.kubernetes.io/name: storefront-bff
+    app.kubernetes.io/instance: yas-dev
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: http
+      protocol: TCP
+      name: http
+    - port: 8090
+      targetPort: metric
+      protocol: TCP
+      name: metric
+  selector:
+    app.kubernetes.io/name: storefront-bff
+    app.kubernetes.io/instance: yas-dev
+---
+# Source: yas-all/charts/storefront-ui/charts/ui/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: storefront-ui
+  labels:
+    helm.sh/chart: ui-0.1.0
+    app.kubernetes.io/name: storefront-ui
+    app.kubernetes.io/instance: yas-dev
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  type: ClusterIP
+  ports:
+    - port: 3000
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: storefront-ui
+    app.kubernetes.io/instance: yas-dev
+---
+# Source: yas-all/charts/swagger-ui/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: yas-dev-swagger-ui
+  labels:
+    helm.sh/chart: swagger-ui-0.1.0
+    app.kubernetes.io/name: swagger-ui
+    app.kubernetes.io/instance: yas-dev
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: swagger-ui
+    app.kubernetes.io/instance: yas-dev
+---
+# Source: yas-all/charts/tax/charts/backend/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: tax
+  labels:
+    helm.sh/chart: backend-0.1.0
+    app.kubernetes.io/name: tax
+    app.kubernetes.io/instance: yas-dev
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: http
+      protocol: TCP
+      name: http
+    - port: 8090
+      targetPort: metric
+      protocol: TCP
+      name: metric
+  selector:
+    app.kubernetes.io/name: tax
+    app.kubernetes.io/instance: yas-dev
+---
+# Source: yas-all/charts/backoffice-bff/charts/backend/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backoffice-bff
+  labels:
+    helm.sh/chart: backend-0.1.0
+    app.kubernetes.io/name: backoffice-bff
+    app.kubernetes.io/instance: yas-dev
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    configmap.reloader.stakater.com/reload: yas-gateway-routes-config-configmap,backoffice-bff-extra-configmap
+    reloader.stakater.com/search: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: backoffice-bff
+      app.kubernetes.io/instance: yas-dev
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: backoffice-bff
+        app.kubernetes.io/instance: yas-dev
+    spec:
+      serviceAccountName: backoffice-bff
+      securityContext:
+        {}
+      volumes:
+        - name: yas-configuration
+          configMap:
+            name: yas-configuration-configmap
+        - configMap:
+            name: yas-gateway-routes-config-configmap
+          name: yas-gateway-routes-config
+        - configMap:
+            name: backoffice-bff-extra-configmap
+          name: backoffice-bff-extra-config
+      containers:
+        - name: backoffice-bff
+          securityContext:
+            {}
+          image: "ghcr.io/nashtech-garage/yas-backoffice-bff:latest"
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - secretRef:
+                name: yas-postgresql-credentials-secret
+            - secretRef:
+                name: yas-keycloak-credentials-secret
+            - secretRef:
+                name: yas-redis-credentials-secret
+          env:
+            - name: LOGGING_CONFIG
+              value: /opt/yas/config/logback.xml
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://postgresql.postgres:5432/postgres
+            - name: SPRING_CONFIG_ADDITIONAL_LOCATION
+              value: /opt/yas/config/application.yaml,/opt/yas/gateway-routes-config/gateway-routes-config.yaml,/opt/yas/extra-config/backoffice-bff-extra-config.yaml
+            - name: SPRING_PROFILES_ACTIVE
+              value: prod
+            - name: UI_HOST
+              value: http://backoffice-ui:3000
+          volumeMounts:
+            - mountPath: /opt/yas/config
+              name: yas-configuration
+            - mountPath: /opt/yas/gateway-routes-config
+              name: yas-gateway-routes-config
+            - mountPath: /opt/yas/extra-config
+              name: backoffice-bff-extra-config
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+            - name: metric
+              containerPort: 8090
+          lifecycle:
+            
+            preStop:
+              exec:
+                command:
+                - sh
+                - -c
+                - sleep 10
+          livenessProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /actuator/health/liveness
+              port: metric
+            periodSeconds: 10
+            successThreshold: 1
+          readinessProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /actuator/health/readiness
+              port: metric
+            periodSeconds: 10
+            successThreshold: 1
+          resources:
+            {}
+      terminationGracePeriodSeconds: 45
+---
+# Source: yas-all/charts/backoffice-ui/charts/ui/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backoffice-ui
+  labels:
+    helm.sh/chart: ui-0.1.0
+    app.kubernetes.io/name: backoffice-ui
+    app.kubernetes.io/instance: yas-dev
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    reloader.stakater.com/search: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: backoffice-ui
+      app.kubernetes.io/instance: yas-dev
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: backoffice-ui
+        app.kubernetes.io/instance: yas-dev
+    spec:
+      serviceAccountName: backoffice-ui
+      securityContext:
+        {}
+      containers:
+        - name: backoffice-ui
+          securityContext:
+            {}
+          image: "ghcr.io/nashtech-garage/yas-backoffice:latest"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 3000
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            {}
+---
+# Source: yas-all/charts/cart/charts/backend/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cart
+  labels:
+    helm.sh/chart: backend-0.1.0
+    app.kubernetes.io/name: cart
+    app.kubernetes.io/instance: yas-dev
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    reloader.stakater.com/search: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: cart
+      app.kubernetes.io/instance: yas-dev
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: cart
+        app.kubernetes.io/instance: yas-dev
+    spec:
+      serviceAccountName: cart
+      securityContext:
+        {}
+      volumes:
+        - name: yas-configuration
+          configMap:
+            name: yas-configuration-configmap
+        - configMap:
+            name: cart-application-configmap
+          name: cart-application-config
+      containers:
+        - name: cart
+          securityContext:
+            {}
+          image: "ghcr.io/nashtech-garage/yas-cart:latest"
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - secretRef:
+                name: yas-postgresql-credentials-secret
+          env:
+            - name: LOGGING_CONFIG
+              value: /opt/yas/config/logback.xml
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://postgresql.postgres:5432/cart
+            - name: SPRING_CONFIG_ADDITIONAL_LOCATION
+              value: /opt/yas/config/application.yaml,/opt/yas/cart/cart-application.yaml
+          volumeMounts:
+            - mountPath: /opt/yas/config
+              name: yas-configuration
+            - mountPath: /opt/yas/cart
+              name: cart-application-config
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+            - name: metric
+              containerPort: 8090
+          lifecycle:
+            
+            preStop:
+              exec:
+                command:
+                - sh
+                - -c
+                - sleep 10
+          livenessProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /actuator/health/liveness
+              port: metric
+            periodSeconds: 10
+            successThreshold: 1
+          readinessProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /actuator/health/readiness
+              port: metric
+            periodSeconds: 10
+            successThreshold: 1
+          resources:
+            {}
+      terminationGracePeriodSeconds: 45
+---
+# Source: yas-all/charts/customer/charts/backend/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: customer
+  labels:
+    helm.sh/chart: backend-0.1.0
+    app.kubernetes.io/name: customer
+    app.kubernetes.io/instance: yas-dev
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    reloader.stakater.com/search: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: customer
+      app.kubernetes.io/instance: yas-dev
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: customer
+        app.kubernetes.io/instance: yas-dev
+    spec:
+      serviceAccountName: customer
+      securityContext:
+        {}
+      volumes:
+        - name: yas-configuration
+          configMap:
+            name: yas-configuration-configmap
+        - configMap:
+            name: customer-application-configmap
+          name: customer-application
+      containers:
+        - name: customer
+          securityContext:
+            {}
+          image: "ghcr.io/nashtech-garage/yas-customer:latest"
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - secretRef:
+                name: yas-postgresql-credentials-secret
+            - secretRef:
+                name: yas-keycloak-credentials-secret
+          env:
+            - name: LOGGING_CONFIG
+              value: /opt/yas/config/logback.xml
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://postgresql.postgres:5432/customer
+            - name: SPRING_CONFIG_ADDITIONAL_LOCATION
+              value: /opt/yas/config/application.yaml,/opt/yas/customer/customer-application.yaml
+          volumeMounts:
+            - mountPath: /opt/yas/config
+              name: yas-configuration
+            - mountPath: /opt/yas/customer
+              name: customer-application
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+            - name: metric
+              containerPort: 8090
+          lifecycle:
+            
+            preStop:
+              exec:
+                command:
+                - sh
+                - -c
+                - sleep 10
+          livenessProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /actuator/health/liveness
+              port: metric
+            periodSeconds: 10
+            successThreshold: 1
+          readinessProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /actuator/health/readiness
+              port: metric
+            periodSeconds: 10
+            successThreshold: 1
+          resources:
+            {}
+      terminationGracePeriodSeconds: 45
+---
+# Source: yas-all/charts/inventory/charts/backend/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory
+  labels:
+    helm.sh/chart: backend-0.1.0
+    app.kubernetes.io/name: inventory
+    app.kubernetes.io/instance: yas-dev
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    reloader.stakater.com/search: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: inventory
+      app.kubernetes.io/instance: yas-dev
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: inventory
+        app.kubernetes.io/instance: yas-dev
+    spec:
+      serviceAccountName: inventory
+      securityContext:
+        {}
+      volumes:
+        - name: yas-configuration
+          configMap:
+            name: yas-configuration-configmap
+      containers:
+        - name: inventory
+          securityContext:
+            {}
+          image: "ghcr.io/nashtech-garage/yas-inventory:latest"
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - secretRef:
+                name: yas-postgresql-credentials-secret
+          env:
+            - name: LOGGING_CONFIG
+              value: /opt/yas/config/logback.xml
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://postgresql.postgres:5432/inventory
+            - name: SPRING_CONFIG_ADDITIONAL_LOCATION
+              value: /opt/yas/config/application.yaml
+          volumeMounts:
+            - mountPath: /opt/yas/config
+              name: yas-configuration
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+            - name: metric
+              containerPort: 8090
+          lifecycle:
+            
+            preStop:
+              exec:
+                command:
+                - sh
+                - -c
+                - sleep 10
+          livenessProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /actuator/health/liveness
+              port: metric
+            periodSeconds: 10
+            successThreshold: 1
+          readinessProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /actuator/health/readiness
+              port: metric
+            periodSeconds: 10
+            successThreshold: 1
+          resources:
+            {}
+      terminationGracePeriodSeconds: 45
+---
+# Source: yas-all/charts/media/charts/backend/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: media
+  labels:
+    helm.sh/chart: backend-0.1.0
+    app.kubernetes.io/name: media
+    app.kubernetes.io/instance: yas-dev
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    reloader.stakater.com/search: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: media
+      app.kubernetes.io/instance: yas-dev
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: media
+        app.kubernetes.io/instance: yas-dev
+    spec:
+      serviceAccountName: media
+      securityContext:
+        {}
+      volumes:
+        - name: yas-configuration
+          configMap:
+            name: yas-configuration-configmap
+        - configMap:
+            name: media-application-configmap
+          name: media-application
+      containers:
+        - name: media
+          securityContext:
+            {}
+          image: "ghcr.io/nashtech-garage/yas-media:latest"
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - secretRef:
+                name: yas-postgresql-credentials-secret
+          env:
+            - name: LOGGING_CONFIG
+              value: /opt/yas/config/logback.xml
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://postgresql.postgres:5432/media
+            - name: SPRING_CONFIG_ADDITIONAL_LOCATION
+              value: /opt/yas/config/application.yaml,/opt/yas/media/media-application.yaml
+          volumeMounts:
+            - mountPath: /opt/yas/config
+              name: yas-configuration
+            - mountPath: /opt/yas/media
+              name: media-application
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+            - name: metric
+              containerPort: 8090
+          lifecycle:
+            
+            preStop:
+              exec:
+                command:
+                - sh
+                - -c
+                - sleep 10
+          livenessProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /actuator/health/liveness
+              port: metric
+            periodSeconds: 10
+            successThreshold: 1
+          readinessProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /actuator/health/readiness
+              port: metric
+            periodSeconds: 10
+            successThreshold: 1
+          resources:
+            {}
+      terminationGracePeriodSeconds: 45
+---
+# Source: yas-all/charts/order/charts/backend/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order
+  labels:
+    helm.sh/chart: backend-0.1.0
+    app.kubernetes.io/name: order
+    app.kubernetes.io/instance: yas-dev
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    reloader.stakater.com/search: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: order
+      app.kubernetes.io/instance: yas-dev
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: order
+        app.kubernetes.io/instance: yas-dev
+    spec:
+      serviceAccountName: order
+      securityContext:
+        {}
+      volumes:
+        - name: yas-configuration
+          configMap:
+            name: yas-configuration-configmap
+        - configMap:
+            name: order-application-configmap
+          name: order-application-config
+      containers:
+        - name: order
+          securityContext:
+            {}
+          image: "ghcr.io/nashtech-garage/yas-order:latest"
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - secretRef:
+                name: yas-postgresql-credentials-secret
+          env:
+            - name: LOGGING_CONFIG
+              value: /opt/yas/config/logback.xml
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://postgresql.postgres:5432/order
+            - name: SPRING_CONFIG_ADDITIONAL_LOCATION
+              value: /opt/yas/config/application.yaml,/opt/yas/order/order-application.yaml
+          volumeMounts:
+            - mountPath: /opt/yas/config
+              name: yas-configuration
+            - mountPath: /opt/yas/order
+              name: order-application-config
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+            - name: metric
+              containerPort: 8090
+          lifecycle:
+            
+            preStop:
+              exec:
+                command:
+                - sh
+                - -c
+                - sleep 10
+          livenessProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /actuator/health/liveness
+              port: metric
+            periodSeconds: 10
+            successThreshold: 1
+          readinessProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /actuator/health/readiness
+              port: metric
+            periodSeconds: 10
+            successThreshold: 1
+          resources:
+            {}
+      terminationGracePeriodSeconds: 45
+---
+# Source: yas-all/charts/payment-paypal/charts/backend/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payment-paypal
+  labels:
+    helm.sh/chart: backend-0.1.0
+    app.kubernetes.io/name: payment-paypal
+    app.kubernetes.io/instance: yas-dev
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    reloader.stakater.com/search: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: payment-paypal
+      app.kubernetes.io/instance: yas-dev
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: payment-paypal
+        app.kubernetes.io/instance: yas-dev
+    spec:
+      serviceAccountName: payment-paypal
+      securityContext:
+        {}
+      volumes:
+        - name: yas-configuration
+          configMap:
+            name: yas-configuration-configmap
+        - configMap:
+            name: payment-paypal-application-configmap
+          name: payment-paypal-application-config
+      containers:
+        - name: payment-paypal
+          securityContext:
+            {}
+          image: "ghcr.io/nashtech-garage/yas-payment-paypal:latest"
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - secretRef:
+                name: yas-postgresql-credentials-secret
+          env:
+            - name: LOGGING_CONFIG
+              value: /opt/yas/config/logback.xml
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://postgresql.postgres:5432/payment-paypal
+            - name: SPRING_CONFIG_ADDITIONAL_LOCATION
+              value: /opt/yas/config/application.yaml,/opt/yas/payment-paypal/payment-paypal-application.yaml
+          volumeMounts:
+            - mountPath: /opt/yas/config
+              name: yas-configuration
+            - mountPath: /opt/yas/payment-paypal
+              name: payment-paypal-application-config
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+            - name: metric
+              containerPort: 8090
+          lifecycle:
+            
+            preStop:
+              exec:
+                command:
+                - sh
+                - -c
+                - sleep 10
+          livenessProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /actuator/health/liveness
+              port: metric
+            periodSeconds: 10
+            successThreshold: 1
+          readinessProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /actuator/health/readiness
+              port: metric
+            periodSeconds: 10
+            successThreshold: 1
+          resources:
+            {}
+      terminationGracePeriodSeconds: 45
+---
+# Source: yas-all/charts/payment/charts/backend/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payment
+  labels:
+    helm.sh/chart: backend-0.1.0
+    app.kubernetes.io/name: payment
+    app.kubernetes.io/instance: yas-dev
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    reloader.stakater.com/search: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: payment
+      app.kubernetes.io/instance: yas-dev
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: payment
+        app.kubernetes.io/instance: yas-dev
+    spec:
+      serviceAccountName: payment
+      securityContext:
+        {}
+      volumes:
+        - name: yas-configuration
+          configMap:
+            name: yas-configuration-configmap
+        - configMap:
+            name: payment-application-configmap
+          name: payment-application-config
+      containers:
+        - name: payment
+          securityContext:
+            {}
+          image: "ghcr.io/nashtech-garage/yas-payment:latest"
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - secretRef:
+                name: yas-postgresql-credentials-secret
+          env:
+            - name: LOGGING_CONFIG
+              value: /opt/yas/config/logback.xml
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://postgresql.postgres:5432/payment
+            - name: SPRING_CONFIG_ADDITIONAL_LOCATION
+              value: /opt/yas/config/application.yaml,/opt/yas/payment/payment-application.yaml
+          volumeMounts:
+            - mountPath: /opt/yas/config
+              name: yas-configuration
+            - mountPath: /opt/yas/payment
+              name: payment-application-config
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+            - name: metric
+              containerPort: 8090
+          lifecycle:
+            
+            preStop:
+              exec:
+                command:
+                - sh
+                - -c
+                - sleep 10
+          livenessProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /actuator/health/liveness
+              port: metric
+            periodSeconds: 10
+            successThreshold: 1
+          readinessProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /actuator/health/readiness
+              port: metric
+            periodSeconds: 10
+            successThreshold: 1
+          resources:
+            {}
+      terminationGracePeriodSeconds: 45
+---
+# Source: yas-all/charts/product/charts/backend/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product
+  labels:
+    helm.sh/chart: backend-0.1.0
+    app.kubernetes.io/name: product
+    app.kubernetes.io/instance: yas-dev
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    reloader.stakater.com/search: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: product
+      app.kubernetes.io/instance: yas-dev
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: product
+        app.kubernetes.io/instance: yas-dev
+    spec:
+      serviceAccountName: product
+      securityContext:
+        {}
+      volumes:
+        - name: yas-configuration
+          configMap:
+            name: yas-configuration-configmap
+        - configMap:
+            name: product-application-configmap
+          name: product-application-config
+      containers:
+        - name: product
+          securityContext:
+            {}
+          image: "ghcr.io/nashtech-garage/yas-product:latest"
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - secretRef:
+                name: yas-postgresql-credentials-secret
+          env:
+            - name: LOGGING_CONFIG
+              value: /opt/yas/config/logback.xml
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://postgresql.postgres:5432/product
+            - name: SPRING_CONFIG_ADDITIONAL_LOCATION
+              value: /opt/yas/config/application.yaml,/opt/yas/product/product-application.yaml
+          volumeMounts:
+            - mountPath: /opt/yas/config
+              name: yas-configuration
+            - mountPath: /opt/yas/product
+              name: product-application-config
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+            - name: metric
+              containerPort: 8090
+          lifecycle:
+            
+            preStop:
+              exec:
+                command:
+                - sh
+                - -c
+                - sleep 10
+          livenessProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /actuator/health/liveness
+              port: metric
+            periodSeconds: 10
+            successThreshold: 1
+          readinessProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /actuator/health/readiness
+              port: metric
+            periodSeconds: 10
+            successThreshold: 1
+          resources:
+            {}
+      terminationGracePeriodSeconds: 45
+---
+# Source: yas-all/charts/promotion/charts/backend/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: promotion
+  labels:
+    helm.sh/chart: backend-0.1.0
+    app.kubernetes.io/name: promotion
+    app.kubernetes.io/instance: yas-dev
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    reloader.stakater.com/search: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: promotion
+      app.kubernetes.io/instance: yas-dev
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: promotion
+        app.kubernetes.io/instance: yas-dev
+    spec:
+      serviceAccountName: promotion
+      securityContext:
+        {}
+      volumes:
+        - name: yas-configuration
+          configMap:
+            name: yas-configuration-configmap
+      containers:
+        - name: promotion
+          securityContext:
+            {}
+          image: "ghcr.io/nashtech-garage/yas-promotion:latest"
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - secretRef:
+                name: yas-postgresql-credentials-secret
+          env:
+            - name: LOGGING_CONFIG
+              value: /opt/yas/config/logback.xml
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://postgresql.postgres:5432/promotion
+            - name: SPRING_CONFIG_ADDITIONAL_LOCATION
+              value: /opt/yas/config/application.yaml
+          volumeMounts:
+            - mountPath: /opt/yas/config
+              name: yas-configuration
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+            - name: metric
+              containerPort: 8090
+          lifecycle:
+            
+            preStop:
+              exec:
+                command:
+                - sh
+                - -c
+                - sleep 10
+          livenessProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /actuator/health/liveness
+              port: metric
+            periodSeconds: 10
+            successThreshold: 1
+          readinessProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /actuator/health/readiness
+              port: metric
+            periodSeconds: 10
+            successThreshold: 1
+          resources:
+            {}
+      terminationGracePeriodSeconds: 45
+---
+# Source: yas-all/charts/search/charts/backend/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: search
+  labels:
+    helm.sh/chart: backend-0.1.0
+    app.kubernetes.io/name: search
+    app.kubernetes.io/instance: yas-dev
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    reloader.stakater.com/search: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: search
+      app.kubernetes.io/instance: yas-dev
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: search
+        app.kubernetes.io/instance: yas-dev
+    spec:
+      serviceAccountName: search
+      securityContext:
+        {}
+      volumes:
+        - name: yas-configuration
+          configMap:
+            name: yas-configuration-configmap
+        - configMap:
+            name: search-application-configmap
+          name: search-application
+      containers:
+        - name: search
+          securityContext:
+            {}
+          image: "ghcr.io/nashtech-garage/yas-search:latest"
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - secretRef:
+                name: yas-postgresql-credentials-secret
+            - secretRef:
+                name: yas-elasticsearch-credentials-secret
+          env:
+            - name: LOGGING_CONFIG
+              value: /opt/yas/config/logback.xml
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://postgresql.postgres:5432/search
+            - name: SPRING_CONFIG_ADDITIONAL_LOCATION
+              value: /opt/yas/config/application.yaml,/opt/yas/search/search-application.yaml
+          volumeMounts:
+            - mountPath: /opt/yas/config
+              name: yas-configuration
+            - mountPath: /opt/yas/search
+              name: search-application
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+            - name: metric
+              containerPort: 8090
+          lifecycle:
+            
+            preStop:
+              exec:
+                command:
+                - sh
+                - -c
+                - sleep 10
+          livenessProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /actuator/health/liveness
+              port: metric
+            periodSeconds: 10
+            successThreshold: 1
+          readinessProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /actuator/health/readiness
+              port: metric
+            periodSeconds: 10
+            successThreshold: 1
+          resources:
+            {}
+      terminationGracePeriodSeconds: 45
+---
+# Source: yas-all/charts/storefront-bff/charts/backend/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: storefront-bff
+  labels:
+    helm.sh/chart: backend-0.1.0
+    app.kubernetes.io/name: storefront-bff
+    app.kubernetes.io/instance: yas-dev
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    configmap.reloader.stakater.com/reload: yas-gateway-routes-config-configmap,storefront-bff-extra-configmap
+    reloader.stakater.com/search: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: storefront-bff
+      app.kubernetes.io/instance: yas-dev
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: storefront-bff
+        app.kubernetes.io/instance: yas-dev
+    spec:
+      serviceAccountName: storefront-bff
+      securityContext:
+        {}
+      volumes:
+        - name: yas-configuration
+          configMap:
+            name: yas-configuration-configmap
+        - configMap:
+            name: yas-gateway-routes-config-configmap
+          name: yas-gateway-routes-config
+        - configMap:
+            name: storefront-bff-extra-configmap
+          name: storefront-bff-extra-config
+      containers:
+        - name: storefront-bff
+          securityContext:
+            {}
+          image: "ghcr.io/nashtech-garage/yas-storefront-bff:latest"
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - secretRef:
+                name: yas-postgresql-credentials-secret
+            - secretRef:
+                name: yas-keycloak-credentials-secret
+            - secretRef:
+                name: yas-redis-credentials-secret
+          env:
+            - name: LOGGING_CONFIG
+              value: /opt/yas/config/logback.xml
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://postgresql.postgres:5432/postgres
+            - name: SPRING_CONFIG_ADDITIONAL_LOCATION
+              value: /opt/yas/config/application.yaml,/opt/yas/gateway-routes-config/gateway-routes-config.yaml,/opt/yas/extra-config/storefront-bff-extra-config.yaml
+            - name: SPRING_PROFILES_ACTIVE
+              value: prod
+            - name: UI_HOST
+              value: http://storefront-ui:3000
+          volumeMounts:
+            - mountPath: /opt/yas/config
+              name: yas-configuration
+            - mountPath: /opt/yas/gateway-routes-config
+              name: yas-gateway-routes-config
+            - mountPath: /opt/yas/extra-config
+              name: storefront-bff-extra-config
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+            - name: metric
+              containerPort: 8090
+          lifecycle:
+            
+            preStop:
+              exec:
+                command:
+                - sh
+                - -c
+                - sleep 10
+          livenessProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /actuator/health/liveness
+              port: metric
+            periodSeconds: 10
+            successThreshold: 1
+          readinessProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /actuator/health/readiness
+              port: metric
+            periodSeconds: 10
+            successThreshold: 1
+          resources:
+            {}
+      terminationGracePeriodSeconds: 45
+---
+# Source: yas-all/charts/storefront-ui/charts/ui/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: storefront-ui
+  labels:
+    helm.sh/chart: ui-0.1.0
+    app.kubernetes.io/name: storefront-ui
+    app.kubernetes.io/instance: yas-dev
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    reloader.stakater.com/search: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: storefront-ui
+      app.kubernetes.io/instance: yas-dev
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: storefront-ui
+        app.kubernetes.io/instance: yas-dev
+    spec:
+      serviceAccountName: storefront-ui
+      securityContext:
+        {}
+      containers:
+        - name: storefront-ui
+          env:
+            - name: API_BASE_PATH
+              value: http://storefront.yas.local.com/api
+          securityContext:
+            {}
+          image: "ghcr.io/nashtech-garage/yas-storefront:latest"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 3000
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            {}
+---
+# Source: yas-all/charts/swagger-ui/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yas-dev-swagger-ui
+  labels:
+    helm.sh/chart: swagger-ui-0.1.0
+    app.kubernetes.io/name: swagger-ui
+    app.kubernetes.io/instance: yas-dev
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: swagger-ui
+      app.kubernetes.io/instance: yas-dev
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: swagger-ui
+        app.kubernetes.io/instance: yas-dev
+    spec:
+      serviceAccountName: yas-dev-swagger-ui
+      securityContext:
+        {}
+      containers:
+        - name: swagger-ui
+          securityContext:
+            {}
+          image: "swaggerapi/swagger-ui:v4.16.0"
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: BASE_URL
+              value: /swagger-ui
+            - name: URLS
+              value: "[{ url: 'http://api.yas.local.com/product/v3/api-docs', name: 'Product' }, { url: 'http://api.yas.local.com/media/v3/api-docs', name: 'Media' }, { url: 'http://api.yas.local.com/customer/v3/api-docs', name: 'Customer' }, { url: 'http://api.yas.local.com/cart/v3/api-docs', name: 'Cart'}, { url: 'http://api.yas.local.com/rating/v3/api-docs', name: 'Rating' }, { url: 'http://api.yas.local.com/order/v3/api-docs', name: 'Order'}, { url: 'http://api.yas.local.com/payment/v3/api-docs', name: 'Payment'}, { url: 'http://api.yas.local.com/location/v3/api-docs', name: 'Location'}, { url: 'http://api.yas.local.com/inventory/v3/api-docs', name: 'Inventory'}, { url: 'http://api.yas.local.com/tax/v3/api-docs', name: 'Tax' }, { url: 'http://api.yas.local.com/promotion/v3/api-docs', name: 'Promotion'}, { url: 'http://api.yas.local.com/search/v3/api-docs', name: 'Search'}]"
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /swagger-ui
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /swagger-ui
+              port: http
+          resources:
+            {}
+---
+# Source: yas-all/charts/tax/charts/backend/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tax
+  labels:
+    helm.sh/chart: backend-0.1.0
+    app.kubernetes.io/name: tax
+    app.kubernetes.io/instance: yas-dev
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    reloader.stakater.com/search: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: tax
+      app.kubernetes.io/instance: yas-dev
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: tax
+        app.kubernetes.io/instance: yas-dev
+    spec:
+      serviceAccountName: tax
+      securityContext:
+        {}
+      volumes:
+        - name: yas-configuration
+          configMap:
+            name: yas-configuration-configmap
+      containers:
+        - name: tax
+          securityContext:
+            {}
+          image: "ghcr.io/nashtech-garage/yas-tax:latest"
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - secretRef:
+                name: yas-postgresql-credentials-secret
+          env:
+            - name: LOGGING_CONFIG
+              value: /opt/yas/config/logback.xml
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://postgresql.postgres:5432/tax
+            - name: SPRING_CONFIG_ADDITIONAL_LOCATION
+              value: /opt/yas/config/application.yaml
+          volumeMounts:
+            - mountPath: /opt/yas/config
+              name: yas-configuration
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+            - name: metric
+              containerPort: 8090
+          lifecycle:
+            
+            preStop:
+              exec:
+                command:
+                - sh
+                - -c
+                - sleep 10
+          livenessProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /actuator/health/liveness
+              port: metric
+            periodSeconds: 10
+            successThreshold: 1
+          readinessProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /actuator/health/readiness
+              port: metric
+            periodSeconds: 10
+            successThreshold: 1
+          resources:
+            {}
+      terminationGracePeriodSeconds: 45
+---
+# Source: yas-all/charts/yas-configuration/charts/reloader/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    meta.helm.sh/release-namespace: "default"
+    meta.helm.sh/release-name: "yas-dev"
+  labels:
+    app: yas-reloader
+    chart: "reloader-1.0.29"
+    release: "yas-dev"
+    heritage: "Helm"
+    app.kubernetes.io/managed-by: "Helm"
+    group: com.stakater.platform
+    provider: stakater
+    version: v1.0.29
+  name: yas-reloader
+  namespace: default
+spec:
+  replicas: 1
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: yas-reloader
+      release: "yas-dev"
+  template:
+    metadata:
+      labels:
+        app: yas-reloader
+        chart: "reloader-1.0.29"
+        release: "yas-dev"
+        heritage: "Helm"
+        app.kubernetes.io/managed-by: "Helm"
+        group: com.stakater.platform
+        provider: stakater
+        version: v1.0.29
+    spec:
+      containers:
+      - image: "ghcr.io/stakater/reloader:v1.0.29"
+        imagePullPolicy: IfNotPresent
+        name: yas-reloader
+        env:
+        - name: KUBERNETES_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+
+        ports:
+        - name: http
+          containerPort: 9090
+        livenessProbe:
+          httpGet:
+            path: /live
+            port: http
+          timeoutSeconds: 5
+          failureThreshold: 5
+          periodSeconds: 10
+          successThreshold: 1
+          initialDelaySeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /metrics
+            port: http
+          timeoutSeconds: 5
+          failureThreshold: 5
+          periodSeconds: 10
+          successThreshold: 1
+          initialDelaySeconds: 10
+
+        securityContext:
+          {}
+      securityContext: 
+        runAsNonRoot: true
+        runAsUser: 65534
+      serviceAccountName: yas-reloader
+---
+# Source: yas-all/charts/backoffice-bff/charts/backend/templates/ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: backoffice-bff
+  labels:
+    helm.sh/chart: backend-0.1.0
+    app.kubernetes.io/name: backoffice-bff
+    app.kubernetes.io/instance: yas-dev
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: backoffice.yas.local.com
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: backoffice-bff
+                port:
+                  number: 80
+---
+# Source: yas-all/charts/storefront-bff/charts/backend/templates/ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: storefront-bff
+  labels:
+    helm.sh/chart: backend-0.1.0
+    app.kubernetes.io/name: storefront-bff
+    app.kubernetes.io/instance: yas-dev
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: storefront.yas.local.com
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: storefront-bff
+                port:
+                  number: 80
+---
+# Source: yas-all/charts/backoffice-bff/charts/backend/templates/servicemonitoring.yaml
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: backoffice-bff
+  labels:
+    release: prometheus
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: backoffice-bff
+  endpoints:
+    - port: 'metric'
+      path: '/actuator/prometheus'
+---
+# Source: yas-all/charts/cart/charts/backend/templates/servicemonitoring.yaml
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: cart
+  labels:
+    release: prometheus
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: cart
+  endpoints:
+    - port: 'metric'
+      path: '/actuator/prometheus'
+---
+# Source: yas-all/charts/customer/charts/backend/templates/servicemonitoring.yaml
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: customer
+  labels:
+    release: prometheus
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: customer
+  endpoints:
+    - port: 'metric'
+      path: '/actuator/prometheus'
+---
+# Source: yas-all/charts/inventory/charts/backend/templates/servicemonitoring.yaml
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: inventory
+  labels:
+    release: prometheus
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: inventory
+  endpoints:
+    - port: 'metric'
+      path: '/actuator/prometheus'
+---
+# Source: yas-all/charts/media/charts/backend/templates/servicemonitoring.yaml
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: media
+  labels:
+    release: prometheus
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: media
+  endpoints:
+    - port: 'metric'
+      path: '/actuator/prometheus'
+---
+# Source: yas-all/charts/order/charts/backend/templates/servicemonitoring.yaml
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: order
+  labels:
+    release: prometheus
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: order
+  endpoints:
+    - port: 'metric'
+      path: '/actuator/prometheus'
+---
+# Source: yas-all/charts/payment-paypal/charts/backend/templates/servicemonitoring.yaml
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: payment-paypal
+  labels:
+    release: prometheus
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: payment-paypal
+  endpoints:
+    - port: 'metric'
+      path: '/actuator/prometheus'
+---
+# Source: yas-all/charts/payment/charts/backend/templates/servicemonitoring.yaml
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: payment
+  labels:
+    release: prometheus
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: payment
+  endpoints:
+    - port: 'metric'
+      path: '/actuator/prometheus'
+---
+# Source: yas-all/charts/product/charts/backend/templates/servicemonitoring.yaml
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: product
+  labels:
+    release: prometheus
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: product
+  endpoints:
+    - port: 'metric'
+      path: '/actuator/prometheus'
+---
+# Source: yas-all/charts/promotion/charts/backend/templates/servicemonitoring.yaml
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: promotion
+  labels:
+    release: prometheus
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: promotion
+  endpoints:
+    - port: 'metric'
+      path: '/actuator/prometheus'
+---
+# Source: yas-all/charts/search/charts/backend/templates/servicemonitoring.yaml
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: search
+  labels:
+    release: prometheus
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: search
+  endpoints:
+    - port: 'metric'
+      path: '/actuator/prometheus'
+---
+# Source: yas-all/charts/storefront-bff/charts/backend/templates/servicemonitoring.yaml
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: storefront-bff
+  labels:
+    release: prometheus
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: storefront-bff
+  endpoints:
+    - port: 'metric'
+      path: '/actuator/prometheus'
+---
+# Source: yas-all/charts/tax/charts/backend/templates/servicemonitoring.yaml
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: tax
+  labels:
+    release: prometheus
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: tax
+  endpoints:
+    - port: 'metric'
+      path: '/actuator/prometheus'
+---
+# Source: yas-all/charts/swagger-ui/templates/tests/test-connection.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "yas-dev-swagger-ui-test-connection"
+  labels:
+    helm.sh/chart: swagger-ui-0.1.0
+    app.kubernetes.io/name: swagger-ui
+    app.kubernetes.io/instance: yas-dev
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['yas-dev-swagger-ui:8080']
+  restartPolicy: Never

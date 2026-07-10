@@ -1,0 +1,20 @@
+🚫 Những nhiệm vụ CHƯA THỂ LÀM (bị chặn lại):
+1. Thành viên 3 (ArgoCD - GitOps): Bị chặn phần Staging
+
+TV3 không thể hoàn thành Bước 3 (Tạo ArgoCD Application cho staging) và Bước 6 (Test luồng staging release tag).
+Lý do: Mặc dù ArgoCD có khả năng tự tạo namespace, nhưng các ứng dụng YAS cần các ConfigMap và Secret khởi tạo ban đầu (từ file deploy-yas-configuration.sh của TV1). Nếu bạn chưa chạy file đó cho staging, ArgoCD có deploy ứng dụng lên thì chúng cũng sẽ báo lỗi vì thiếu cấu hình.
+2. Thành viên 2 (Jenkins CI/CD): Bị chặn bước Sync cuối cùng
+
+TV2 không thể test thành công đoạn mã Deploy to Staging (release tag only) trong Jenkinsfile.
+Lý do: Bước cuối cùng của đoạn mã đó là gọi lệnh argocd app sync yas-staging. Nếu staging chưa tồn tại và TV3 chưa setup xong ArgoCD cho staging, lệnh này trên Jenkins sẽ báo lỗi thất bại đỏ lòm.
+✅ Những nhiệm vụ CÓ THỂ LÀM NGAY BÂY GIỜ:
+1. Thành viên 4 (Service Mesh - Istio): Làm được 100% ngay lập tức!
+
+Theo ghi chú trong file phân công: "Phụ thuộc: Cần TV1 hoàn thành (cluster và namespace yas đang chạy đầy đủ) trước khi bắt đầu."
+Hiện tại cụm yas của bạn đã xanh mượt toàn tập, nên TV4 hoàn toàn có thể cài đặt Istio, bật mTLS và test các quyền AuthorizationPolicy ngay trên cụm yas mà không cần bận tâm đến staging hay dev.
+2. Thành viên 2 (Jenkins): Làm được 80%
+
+TV2 hoàn toàn có thể bắt tay vào dựng Jenkins, cấu hình webhook, viết CI pipeline để Build & Push image lên Docker Hub, và hoàn thành 2 job developer_build + cleanup.
+3. Thành viên 3 (ArgoCD): Làm luồng Dev
+
+TV3 có thể cài đặt ArgoCD và cấu hình đồng bộ (auto-sync) trơn tru cho cụm dev vì dev cũng đã được bạn khởi động xanh mượt rồi.

@@ -1,0 +1,218 @@
+# Phần 5: Triển Khai Hệ Thống Observability
+
+---
+
+## 5.1. Deploy Prometheus & Grafana
+
+**Thực hiện:** Thêm Helm repository của `prometheus-community` và cài đặt chart `kube-prometheus-stack` vào namespace `observability`. Chart này bao gồm Prometheus Server, Grafana, Alertmanager, Node Exporter và Kube State Metrics.
+
+```bash
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
+
+helm upgrade --install prometheus prometheus-community/kube-prometheus-stack \
+  -n observability \
+  -f k8s/deploy/observability/prometheus.values.yaml \
+  --wait --timeout 5m
+```
+
+File `prometheus.values.yaml` cấu hình:
+- Grafana với 2 datasource bổ sung: **Loki** và **Tempo**
+- Ingress tên miền `grafana.yas.local.com`
+- Liên kết Log → Trace qua trường `traceId` trong log message
+- Prometheus bật `enableRemoteWriteReceiver` để nhận span metrics từ Tempo
+
+**Kết quả:**
+
+![Prometheus và Grafana pods Running]([CHÈN ẢNH: kubectl get pods -n observability hiển thị prometheus-grafana và prometheus-prometheus-kube-prometheus-prometheus-0 ở trạng thái Running])
+
+---
+
+## 5.2. Deploy Loki (Log Storage)
+
+**Thực hiện:** Cài đặt Loki theo kiến trúc phân tán với MinIO làm object storage. Loki gồm 3 component độc lập: `write`, `read`, `backend`.
+
+```bash
+helm repo add grafana https://grafana.github.io/helm-charts
+
+helm upgrade --install loki grafana/loki \
+  -n observability \
+  -f k8s/deploy/observability/loki.values.yaml \
+  --wait --timeout 5m
+```
+
+**Kết quả:**
+
+![Loki pods Running]([CHÈN ẢNH: kubectl get pods -n observability hiển thị loki-write-0, loki-read-*, loki-backend-0, loki-minio-0 ở trạng thái Running])
+
+---
+
+## 5.3. Deploy OpenTelemetry Collector
+
+**Thực hiện:** Cài đặt OTel Collector với 2 pipeline:
+- **Pipeline Traces**: nhận OTLP từ Spring Boot apps (port 4317/4318) → forward sang Tempo
+- **Pipeline Logs**: nhận logs từ Promtail (port 3500) → forward sang Loki
+
+```bash
+helm upgrade --install opentelemetry-collector \
+  k8s/deploy/observability/opentelemetry \
+  -n observability \
+  --wait --timeout 3m
+```
+
+**Kết quả:**
+
+![OTel Collector Running]([CHÈN ẢNH: kubectl get pods -n observability hiển thị opentelemetry-collector-* Running])
+
+---
+
+## 5.4. Xác Nhận Toàn Bộ Stack Đang Chạy
+
+**Thực hiện:** Kiểm tra tất cả pods trong namespace `observability`.
+
+```bash
+kubectl get pods -n observability
+```
+
+**Kết quả:**
+
+![All pods Running]([CHÈN ẢNH: toàn bộ danh sách pods observability đều ở trạng thái Running])
+
+Kiểm tra Helm releases:
+
+```bash
+helm list -n observability
+```
+
+**Kết quả:**
+
+![Helm releases deployed]([CHÈN ẢNH: helm list hiển thị tất cả releases ở STATUS=deployed])
+
+---
+
+## 5.5. Truy Cập Grafana
+
+**Thực hiện:** Mở port-forward để truy cập Grafana từ máy tính cá nhân.
+
+```bash
+kubectl port-forward -n observability svc/prometheus-grafana 3000:80 --address 0.0.0.0
+```
+
+Truy cập `http://localhost:3000` với tài khoản `admin/admin`.
+
+**Kết quả:**
+
+![Grafana Home]([CHÈN ẢNH: Grafana home page sau khi đăng nhập thành công])
+
+---
+
+## 5.6. Kiểm Tra Datasources
+
+**Thực hiện:** Vào **Connections → Data Sources** để xác nhận 3 datasource đã được cấu hình tự động qua `prometheus.values.yaml`.
+
+**Kết quả — Danh sách Datasources:**
+
+![Datasource list]([CHÈN ẢNH: Grafana Data Sources page hiển thị Prometheus, Loki, Tempo])
+
+**Kết quả — Test Prometheus:**
+
+Nhấn **Save & test** trên datasource Prometheus.
+
+![Prometheus datasource working]([CHÈN ẢNH: banner xanh "Data source is working" sau khi test Prometheus])
+
+**Kết quả — Test Loki:**
+
+Nhấn **Save & test** trên datasource Loki.
+
+![Loki datasource connected]([CHÈN ẢNH: banner xanh "Data source connected and labels found" sau khi test Loki])
+
+**Kết quả — Test Tempo:**
+
+Nhấn **Save & test** trên datasource Tempo.
+
+![Tempo datasource working]([CHÈN ẢNH: banner xanh "Data source is working" sau khi test Tempo])
+
+---
+
+## 5.7. Kiểm Tra Metrics (Prometheus)
+
+**Thực hiện:** Vào **Explore → Prometheus**, chạy query để xem số pod đang hoạt động trong cluster.
+
+```promql
+count(kube_pod_status_phase{phase="Running"})
+```
+
+**Kết quả:**
+
+![Prometheus metrics query]([CHÈN ẢNH: Grafana Explore hiển thị kết quả query số pod Running])
+
+**Thực hiện:** Query CPU usage của node.
+
+```promql
+100 - (avg(rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100)
+```
+
+**Kết quả:**
+
+![Node CPU metrics]([CHÈN ẢNH: biểu đồ CPU usage theo thời gian])
+
+---
+
+## 5.8. Kiểm Tra Logs (Loki)
+
+**Thực hiện:** Vào **Explore → Loki**, truy vấn logs từ namespace `observability`.
+
+```logql
+{namespace="observability"}
+```
+
+**Kết quả:**
+
+![Loki log stream]([CHÈN ẢNH: Grafana Explore Loki hiển thị log stream với timestamp và nội dung log])
+
+**Thực hiện:** Lọc log lỗi từ namespace `dev` (nơi chạy các microservice).
+
+```logql
+{namespace="dev"} |= "ERROR"
+```
+
+**Kết quả:**
+
+![Loki error logs]([CHÈN ẢNH: log stream lọc ERROR từ namespace dev])
+
+---
+
+## 5.9. Kiểm Tra Traces (Tempo)
+
+**Thực hiện:** Vào **Explore → Tempo**, tìm kiếm distributed traces từ các microservice.
+
+**Kết quả — Danh sách traces:**
+
+![Tempo trace list]([CHÈN ẢNH: Grafana Explore Tempo hiển thị danh sách traces])
+
+**Thực hiện:** Click vào một trace để xem chi tiết các span.
+
+**Kết quả — Chi tiết trace:**
+
+![Tempo trace detail]([CHÈN ẢNH: trace detail view hiển thị các span theo thứ tự thời gian])
+
+---
+
+## 5.10. Xem Dashboard JVM & HikariCP
+
+**Thực hiện:** Grafana Operator tự động import 2 dashboard qua CRD `GrafanaDashboard`:
+- **JVM Micrometer** (Grafana ID: 4701) — theo dõi JVM heap, GC, threads
+- **HikariCP Connection Pool** (Grafana ID: 6083) — theo dõi kết nối database
+
+```yaml
+# k8s/deploy/observability/grafana/templates/dashboards.yaml
+kind: GrafanaDashboard
+spec:
+  url: "https://grafana.com/api/dashboards/4701/revisions/10/download"
+```
+
+**Kết quả:**
+
+![JVM Dashboard]([CHÈN ẢNH: Dashboard JVM Micrometer hiển thị heap memory, GC pause, thread count])
+
+![HikariCP Dashboard]([CHÈN ẢNH: Dashboard HikariCP hiển thị active connections, pending connections])

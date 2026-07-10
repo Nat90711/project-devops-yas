@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: storefront-nextjs
+  namespace: dev
+spec:
+  type: ExternalName
+  externalName: storefront-ui.dev.svc.cluster.local
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backoffice-nextjs
+  namespace: dev
+spec:
+  type: ExternalName
+  externalName: backoffice-ui.dev.svc.cluster.local

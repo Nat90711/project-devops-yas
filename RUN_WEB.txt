@@ -1,0 +1,1 @@
+sudo -E kubectl port-forward --address 0.0.0.0 svc/ingress-nginx-controller 80:80 -n ingress-nginx

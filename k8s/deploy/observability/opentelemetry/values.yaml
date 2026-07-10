@@ -30,6 +30,14 @@ opentelemetryCollectorConfig:
     otlphttp:
       endpoint: http://tempo:4318
   service:
+    telemetry:
+      metrics:
+        readers:
+          - pull:
+              exporter:
+                prometheus:
+                  host: 0.0.0.0
+                  port: 8889
     pipelines:
       logs:
         receivers: [loki]

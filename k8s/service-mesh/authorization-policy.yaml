@@ -1,0 +1,66 @@
+# Policy 1: Cho phép product gọi inventory
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: allow-product-to-inventory
+  namespace: yas
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: inventory
+  action: ALLOW
+  rules:
+  - from:
+    - source:
+        # Service Account của product pod
+        principals: ["cluster.local/ns/yas/sa/product"]
+  - from:
+    - source:
+        # Cho phép backoffice-bff gọi inventory (BFF gateway)
+        principals: ["cluster.local/ns/yas/sa/backoffice-bff"]
+  - from:
+    - source:
+        # Cho phép storefront-bff gọi inventory
+        principals: ["cluster.local/ns/yas/sa/storefront-bff"]
+---
+# Policy 2: Cho phép order gọi tax
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: allow-order-to-tax
+  namespace: yas
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: tax
+  action: ALLOW
+  rules:
+  - from:
+    - source:
+        principals: ["cluster.local/ns/yas/sa/order"]
+  - from:
+    - source:
+        # Cho phép backoffice-bff gọi tax (BFF gateway)
+        principals: ["cluster.local/ns/yas/sa/backoffice-bff"]
+---
+# Policy 3: Cho phép order gọi promotion
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: allow-order-to-promotion
+  namespace: yas
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: promotion
+  action: ALLOW
+  rules:
+  - from:
+    - source:
+        principals: ["cluster.local/ns/yas/sa/order"]
+  - from:
+    - source:
+        principals: ["cluster.local/ns/yas/sa/backoffice-bff"]
+  - from:
+    - source:
+        principals: ["cluster.local/ns/yas/sa/storefront-bff"]

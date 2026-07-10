@@ -3,6 +3,7 @@ prometheus:
   prometheusSpec:
     enableRemoteWriteReceiver: true
 grafana:
+  assertNoLeakedSecrets: false
   grafana.ini:
     database:
       type: postgres
@@ -13,6 +14,45 @@ grafana:
       ssl_mode: require
   adminUser: admin
   adminPassword: admin
+  additionalDataSources:
+    - name: Loki
+      type: loki
+      access: proxy
+      url: http://loki-gateway
+      uid: loki
+      jsonData:
+        maxLines: 1000
+        httpMethod: GET
+        derivedFields:
+          - datasourceUid: tempo
+            matcherRegex: "traceId=(\\w*)"
+            name: traceId
+            url: "${__value.raw}"
+    - name: Tempo
+      type: tempo
+      access: proxy
+      url: http://tempo:3200
+      uid: tempo
+      jsonData:
+        httpMethod: GET
+        nodeGraph:
+          enabled: true
+        search:
+          hide: false
+        serviceMap:
+          datasourceUid: prometheus
+        tracesToLogsV2:
+          datasourceUid: loki
+        lokiSearch:
+          datasourceUid: loki
+  livenessProbe:
+    initialDelaySeconds: 300
+    periodSeconds: 15
+    failureThreshold: 20
+  readinessProbe:
+    initialDelaySeconds: 15
+    periodSeconds: 15
+    failureThreshold: 20
   ingress:
     ingressClassName: nginx
     enabled: true

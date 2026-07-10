@@ -2,7 +2,6 @@ pipeline {
     agent any
 
     environment {
-        // TODO: Đổi thành account Docker Hub của nhóm bạn
         DOCKERHUB_ACCOUNT = 'tuandaklak' 
     }
 
@@ -30,7 +29,7 @@ pipeline {
                         def line = lines[j].trim()
                         if (line.startsWith('<module>') && line.endsWith('</module>')) {
                             def moduleName = line.substring(8, line.length() - 9)
-                            if (moduleName != 'common-library' && moduleName != 'payment-paypal') {
+                            if (moduleName != 'common-library') {
                                 services.add(moduleName)
                             }
                         }
@@ -172,62 +171,6 @@ pipeline {
                     // Lưu lại commit id để TV3 (ArgoCD stage) sử dụng
                     sh "echo ${commitId} > build-info.txt"
                     archiveArtifacts artifacts: 'build-info.txt'
-                }
-            }
-        }
-
-        stage('Deploy to GitOps Branch') {
-            when {
-                branch 'main'
-            }
-            steps {
-                script {
-                    withCredentials([usernamePassword(
-                        credentialsId: 'github-token-new',
-                        usernameVariable: 'GIT_USER',
-                        passwordVariable: 'GIT_TOKEN'
-                    )]) {
-                        sh """
-                            git config --global user.name "Jenkins GitOps"
-                            git config --global user.email "jenkins@yas.local"
-                            
-                            # Cài đặt URL có nhúng token để push
-                            git remote set-url origin https://\${GIT_USER}:\${GIT_TOKEN}@github.com/Nat90711/project-devops-yas.git
-                            
-                            # Xóa nhánh gitops cục bộ nếu có
-                            git branch -D gitops || true
-                            
-                            # Tạo và chuyển thẳng sang nhánh gitops từ trạng thái Detached HEAD hiện tại
-                            git checkout -b gitops
-                            
-                            # Đóng gói Helm dependencies cho các subcharts trước (product, order...)
-                            for dir in k8s/charts/*/; do
-                                if [ -f "\$dir/Chart.yaml" ] && [ "\$(basename \$dir)" != "yas-all" ]; then
-                                    helm dependency build "\$dir"
-                                fi
-                            done
-                            
-                            # Đóng gói Helm dependency cho umbrella chart cuối cùng
-                            helm dependency build k8s/charts/yas-all
-                            
-                            # Cập nhật imageTag cho các môi trường bằng COMMIT_ID mới nhất
-                            sed -i 's/imageTag: .*/imageTag: "'${env.COMMIT_ID}'"/g' k8s/environments/dev/values.yaml
-                            sed -i 's/imageTag: .*/imageTag: "'${env.COMMIT_ID}'"/g' k8s/environments/staging/values.yaml
-                            
-                            # Force add folder charts (phòng khi bị gitignore)
-                            git add -f k8s/charts/yas-all/charts
-                            
-                            # Theo dõi các file values.yaml vừa sửa
-                            git add k8s/environments/dev/values.yaml
-                            git add k8s/environments/staging/values.yaml
-                            
-                            # Commit
-                            git commit -m "chore: update gitops manifests [skip ci]" || true
-                            
-                            # Force push lên nhánh gitops
-                            git push origin gitops -f
-                        """
-                    }
                 }
             }
         }

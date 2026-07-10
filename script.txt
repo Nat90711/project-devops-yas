@@ -1,0 +1,162 @@
+pipeline {
+  agent any
+
+  parameters {
+    string(name: 'SERVICE_NAME',
+           defaultValue: 'tax',
+           description: 'Tên service cần deploy (ví dụ: tax, cart, product, inventory...)')
+    string(name: 'BRANCH_NAME',
+           defaultValue: 'main',
+           description: 'Branch của developer (ví dụ: dev_tax_service)')
+  }
+
+  environment {
+    DOCKERHUB_ACCOUNT = 'tuandaklak'
+    KUBE_NAMESPACE    = "devbuild-${params.SERVICE_NAME}"
+  }
+
+  stages {
+    stage('Get Commit ID từ branch') {
+      steps {
+        script {
+          // Tải mã nguồn về workspace để lấy thư mục k8s/charts
+          checkout([$class: 'GitSCM', branches: [[name: "*/${params.BRANCH_NAME}"]], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Nat90711/project-devops-yas.git']]])
+          
+          // Lấy commit ID mới nhất trên branch của developer
+          env.IMAGE_TAG = sh(
+            script: "git ls-remote origin refs/heads/${params.BRANCH_NAME} | cut -f1 | cut -c1-7",
+            returnStdout: true
+          ).trim()
+
+          if (!env.IMAGE_TAG) {
+            error("Không tìm thấy branch '${params.BRANCH_NAME}' trên remote!")
+          }
+          echo "Image tag sẽ dùng: ${env.IMAGE_TAG}"
+        }
+      }
+    }
+
+    stage('Deploy service được chọn') {
+      steps {
+        script {
+          // Tự động tải helm nếu Jenkins chưa cài đặt
+          sh """
+            if ! command -v helm &> /dev/null; then
+              echo "Đang cài đặt Helm..."
+              curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+              chmod 700 get_helm.sh
+              export PATH=\$PATH:\$(pwd)
+              HELM_INSTALL_DIR=. ./get_helm.sh --no-sudo
+            fi
+          """
+          
+          // Deploy cấu hình chung trước
+          sh """
+            export PATH=\$PATH:\$(pwd)
+            helm repo add stakater https://stakater.github.io/stakater-charts || true
+            helm repo update
+            helm dependency build k8s/charts/yas-configuration
+            helm upgrade --install yas-configuration k8s/charts/yas-configuration \
+              --namespace ${env.KUBE_NAMESPACE} \
+              --create-namespace
+          """
+
+          // Deploy service của developer với image tag = commit ID của branch đó
+          sh """
+            export PATH=\$PATH:\$(pwd)
+            helm repo add stakater https://stakater.github.io/stakater-charts || true
+            helm repo update
+            helm dependency build k8s/charts/${params.SERVICE_NAME} || true
+            helm upgrade --install ${params.SERVICE_NAME} k8s/charts/${params.SERVICE_NAME} \
+              --namespace ${env.KUBE_NAMESPACE} \
+              --create-namespace \
+              --set backend.image.tag=${env.IMAGE_TAG} \
+              --set backend.image.repository=${env.DOCKERHUB_ACCOUNT}/${params.SERVICE_NAME} \
+              --set backend.service.type=NodePort \
+              --set backend.ingress.enabled=false
+          """
+        }
+      }
+    }
+
+    stage('Deploy các service còn lại (image: latest)') {
+      steps {
+        script {
+          // Các service khác dùng image tag latest/main
+          def otherServices = [
+            'cart','customer','inventory','location','media','order',
+            'payment','payment-paypal','product','promotion','rating','search','tax',
+            'recommendation','webhook','storefront-bff','backoffice-bff'
+          ].findAll { it != params.SERVICE_NAME }
+
+          otherServices.each { svc ->
+            sh """
+              export PATH=\$PATH:\$(pwd)
+              helm repo add stakater https://stakater.github.io/stakater-charts || true
+              helm repo update
+              helm dependency build k8s/charts/${svc} || true
+              helm upgrade --install ${svc} k8s/charts/${svc} \
+                --namespace ${env.KUBE_NAMESPACE} \
+                --create-namespace \
+                --set backend.image.tag=latest \
+                --set backend.image.repository=${env.DOCKERHUB_ACCOUNT}/${svc} \
+                --set backend.service.type=NodePort \
+                --set backend.ingress.enabled=false \
+                || true
+            """
+          }
+        }
+      }
+    }
+
+    stage('In thông tin truy cập') {
+      steps {
+        script {
+          def gcpIp = sh(
+            script: "curl -s ifconfig.me || hostname -I | awk '{print \$1}'",
+            returnStdout: true
+          ).trim()
+
+          // Tải kubectl nếu Jenkins chưa cài đặt
+          sh """
+            if ! command -v kubectl &> /dev/null; then
+              echo "Đang cài đặt Kubectl..."
+              curl -LO "https://dl.k8s.io/release/\$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+              chmod +x ./kubectl
+            fi
+          """
+
+          def nodePort = sh(
+            script: "export PATH=\$PATH:\$(pwd) && kubectl get svc ${params.SERVICE_NAME} -n ${env.KUBE_NAMESPACE} -o jsonpath='{.spec.ports[0].nodePort}'",
+            returnStdout: true
+          ).trim()
+
+          // Map thẳng service ra port 80 của host để tránh bị GCP Firewall chặn NodePort
+          sh """
+            sudo fuser -k 80/tcp || true
+            nohup sudo -E kubectl port-forward --address 0.0.0.0 svc/${params.SERVICE_NAME} 80:80 -n ${env.KUBE_NAMESPACE} >/dev/null 2>&1 &
+          """
+
+          echo """
+============================================================
+✅ DEPLOY THÀNH CÔNG!
+------------------------------------------------------------
+Service  : ${params.SERVICE_NAME}
+Branch   : ${params.BRANCH_NAME}
+Image Tag: ${env.IMAGE_TAG}
+Namespace: ${env.KUBE_NAMESPACE}
+
+Truy cập API Swagger: http://${gcpIp}/${params.SERVICE_NAME}/swagger-ui/index.html
+(Nếu Firewall mở NodePort: http://${gcpIp}:${nodePort}/${params.SERVICE_NAME}/swagger-ui/index.html)
+
+Thêm vào /etc/hosts (nếu dùng domain):
+${gcpIp}  ${params.SERVICE_NAME}.yas.local.com
+
+Để dọn dẹp: chạy job 'cleanup_deployment' với NAMESPACE=${env.KUBE_NAMESPACE}
+============================================================
+          """
+        }
+      }
+    }
+  }
+}

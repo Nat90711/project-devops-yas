@@ -25,6 +25,20 @@ location:
   backend:
     replicaCount: 0
 
+media:
+  backend:
+    extraVolumes:
+      - name: media-storage
+        emptyDir: {}
+      - name: media-application
+        configMap:
+          name: media-application-configmap
+    extraVolumeMounts:
+      - name: media-storage
+        mountPath: /images/
+      - name: media-application
+        mountPath: /opt/yas/media
+
 # Tắt Ingress của swagger-ui để tránh conflict với production (yas)
 swagger-ui:
   ingress:

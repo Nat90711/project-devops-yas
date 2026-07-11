@@ -74,4 +74,4 @@ yas-configuration:
 # test commit
 cart:
   backend:
-    replicaCount: 2
+    replicaCount: 3

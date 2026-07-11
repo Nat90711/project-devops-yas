@@ -70,3 +70,8 @@ yas-configuration:
   mediaApplicationConfig:
     yas:
       publicUrl: http://dev-api.yas.local.com/media
+
+# test commit
+cart:
+  backend:
+    replicaCount: 2
